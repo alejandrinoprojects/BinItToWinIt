@@ -1,0 +1,85 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="220dp"
+    android:height="300dp"
+    android:viewportWidth="220"
+    android:viewportHeight="300">
+
+    <!-- Soft Ground Contact Shadow -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M30,288 C30,278 185,278 185,288 C185,297 30,297 30,288 Z" />
+
+    <!-- Deep Underside Foliage Shadow Canopy (Scalloped Organic Bezier Silhouette) -->
+    <path
+        android:fillColor="#123D16"
+        android:pathData="M24,158 C8,154 2,136 12,122 C4,106 14,84 32,80 C38,60 62,48 84,54 C100,38 132,40 146,58 C168,54 190,68 194,90 C212,98 216,122 204,138 C212,154 198,174 178,174 C166,186 142,188 128,180 C110,188 84,186 70,178 C50,184 28,174 24,158 Z" />
+
+    <!-- Trunk & Spreading Boughs (Base Dark Bark #3E2723) -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M56,288 C74,272 82,242 84,202 C85,180 78,162 56,142 L42,128 L50,120 L74,140 C84,148 90,156 92,166 C94,148 100,128 110,110 L120,114 C112,132 108,150 108,168 C118,154 134,140 154,128 L160,136 C140,150 124,166 116,184 C114,218 118,256 138,288 Z" />
+
+    <!-- Trunk Main Warm Cedar Body (#5D4037) -->
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M66,288 C80,270 88,240 89,202 C90,178 82,160 62,140 L48,126 L52,122 L76,142 C88,152 93,162 95,172 C97,152 103,132 112,114 L118,116 C110,134 106,152 106,172 C116,158 132,144 150,132 L155,137 C136,150 120,166 112,184 C110,218 114,256 130,288 Z" />
+
+    <!-- Trunk Sunlit Right-Edge Bevel Highlight (#795548) -->
+    <path
+        android:fillColor="#795548"
+        android:pathData="M98,288 C96,254 96,216 99,184 C106,166 122,150 142,136 L148,139 C128,152 114,168 108,186 C106,218 110,256 122,288 Z" />
+
+    <!-- Bark Woodgrain Crevices & Hollow Knot Detail (#271815) -->
+    <path
+        android:fillColor="#271815"
+        android:pathData="M82,284 C88,258 90,228 89,198 L92,198 C93,228 91,258 86,284 Z M95,208 C92,208 90,203 90,197 C90,191 92,186 95,186 C98,186 100,191 100,197 C100,203 98,208 95,208 Z M102,278 C100,252 100,226 102,204 L105,204 C103,226 103,252 106,278 Z" />
+
+    <!-- Mid-Tone Forest Green Canopy Body (Rich Scalloped Crown #1B5E20) -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M28,148 C10,142 6,120 18,106 C10,88 22,66 42,64 C48,42 74,30 98,38 C114,22 146,24 160,44 C182,42 202,58 202,80 C216,92 216,116 200,130 C206,146 190,164 170,162 C156,174 130,174 116,164 C98,172 72,170 58,160 C40,166 28,158 28,148 Z" />
+
+    <!-- Mid-Light Leaf Cluster Layer (#2E7D32) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M34,134 C20,128 16,108 28,96 C22,78 34,58 54,56 C62,36 86,26 108,36 C124,20 154,24 166,44 C186,44 202,60 198,80 C210,92 206,114 190,124 C192,138 176,152 158,148 C144,158 120,156 108,146 C90,154 66,150 54,140 C42,144 34,140 34,134 Z" />
+
+    <!-- Sunlit Upper Leaf Clusters (#43A047) -->
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M46,112 C34,106 32,88 44,78 C40,62 52,44 72,44 C80,28 104,20 124,32 C140,18 166,24 174,44 C192,46 202,64 194,82 C202,94 194,112 178,118 C174,130 156,136 142,128 C128,136 106,132 96,120 C80,126 58,122 46,112 Z" />
+
+    <!-- Bright Sun-Kissed Top Foliage Sub-Clusters (#66BB6A) -->
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M78,64 C72,52 82,36 98,36 C108,24 130,24 140,36 C156,28 176,36 178,52 C190,58 192,76 180,86 C172,96 154,96 144,86 C132,92 112,88 104,76 C90,80 78,74 78,64 Z" />
+
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M42,96 C36,86 44,72 58,72 C66,62 84,64 90,74 C98,82 92,98 78,100 C66,106 48,104 42,96 Z" />
+
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M132,112 C128,102 136,90 150,90 C160,82 176,86 180,96 C186,104 178,118 164,118 C152,122 136,120 132,112 Z" />
+
+    <!-- Specular Leaf Rim Crescents & Individual Leaf Accents (#81C784 & #A5D6A7) -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M96,38 C106,26 126,26 136,36 C150,28 168,34 172,48 C162,40 148,40 136,46 C124,36 108,36 96,38 Z" />
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M56,74 C64,64 80,66 86,74 C76,70 64,72 56,74 Z" />
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M148,92 C158,84 172,88 176,96 C166,92 156,92 148,92 Z" />
+
+    <!-- Deep Leaf Notch Accents Giving Layered Depth (#144518) -->
+    <path
+        android:fillColor="#144518"
+        android:pathData="M64,136 C74,144 92,144 102,136 C92,148 74,148 64,136 Z M126,142 C138,150 156,148 164,138 C156,152 136,154 126,142 Z" />
+
+    <!-- Root Grass Tufts Overlapping Trunk Base (#2E7D32 & #43A047) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M48,290 L42,276 L54,284 L56,272 L64,284 L72,274 L74,286 L92,286 L96,274 L102,286 L114,274 L118,286 L130,274 L136,286 L146,278 L142,290 Z" />
+</vector>

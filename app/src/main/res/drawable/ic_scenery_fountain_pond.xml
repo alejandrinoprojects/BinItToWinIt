@@ -1,0 +1,129 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="260dp"
+    android:height="150dp"
+    android:viewportWidth="260"
+    android:viewportHeight="150">
+
+    <!-- Pond Outer Grassy Bank Shadow -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M16,96 C8,72 38,54 88,58 C126,61 154,50 198,56 C238,61 256,82 246,106 C236,130 186,142 134,136 C96,132 24,122 16,96 Z" />
+
+    <!-- Stone Cobble Rim Base (#78909C) -->
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M20,95 C12,73 42,57 90,61 C126,64 154,53 196,59 C234,64 250,83 241,105 C231,127 184,138 134,132 C96,128 28,119 20,95 Z" />
+
+    <!-- Sunlit Stone Rim Inner Bevel (#CFD8DC) -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M24,94 C17,74 45,60 91,63 C126,66 153,56 194,61 C230,66 245,84 236,104 C227,124 182,134 134,129 C96,125 31,116 24,94 Z" />
+
+    <!-- Individual Decorative River Boulders Around Bank -->
+    <path
+        android:fillColor="#607D8B"
+        android:pathData="M18,86 C18,80 30,78 34,84 C36,90 20,92 18,86 Z M224,72 C226,66 240,68 242,75 C242,81 224,79 224,72 Z M230,108 C228,102 242,100 245,107 C246,113 231,114 230,108 Z M46,120 C46,114 62,114 64,120 C64,126 46,126 46,120 Z" />
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M20,84 C21,80 30,79 32,83 C31,87 20,87 20,84 Z M226,71 C228,67 238,68 240,73 C238,76 226,75 226,71 Z M48,118 C49,115 60,115 62,119 C60,122 48,122 48,118 Z" />
+
+    <!-- Main Lagoon Water Surface (#0288D1) -->
+    <path
+        android:fillColor="#0288D1"
+        android:pathData="M28,95 C21,76 48,63 92,66 C126,69 152,59 192,64 C226,69 240,85 232,104 C223,122 180,131 134,126 C97,122 35,114 28,95 Z" />
+
+    <!-- Mid-Depth Turquoise Water Layer (#03A9F4) -->
+    <path
+        android:fillColor="#03A9F4"
+        android:pathData="M36,95 C30,79 54,67 94,70 C126,72 150,64 188,68 C218,72 231,86 224,102 C216,118 176,126 134,122 C100,118 42,111 36,95 Z" />
+
+    <!-- Bright Shallow Water Shimmer Zone (#29B6F6) -->
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M50,94 C45,82 66,72 100,75 C128,77 150,70 180,74 C204,77 215,88 208,100 C201,113 168,119 134,116 C104,113 55,106 50,94 Z" />
+
+    <!-- Specular Water Reflection Streaks (#88E1F5FE) -->
+    <path
+        android:fillColor="#88E1F5FE"
+        android:pathData="M48,84 L82,84 L80,87 L46,87 Z M174,78 L206,78 L204,81 L172,81 Z M156,112 L196,112 L194,115 L154,115 Z" />
+
+    <!-- Cattails & Reeds on Left Bank -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M26,78 L18,44 L22,44 L29,78 Z M31,78 L28,38 L32,38 L34,78 Z M35,78 L41,48 L44,49 L38,78 Z" />
+    <!-- Brown Cattail Spikes -->
+    <path
+        android:fillColor="#4E342E"
+        android:pathData="M27,44 C27,41 33,41 33,44 L33,55 C33,58 27,58 27,55 Z M17,48 C17,45 23,45 23,48 L24,57 C24,60 18,60 18,57 Z" />
+
+    <!-- Notched Lily Pads & Pink Water Lilies -->
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M52,104 C52,98 76,98 76,104 C76,110 52,110 52,104 Z M182,92 C182,86 208,86 208,92 C208,98 182,98 182,92 Z M166,106 C166,101 186,101 186,106 C186,111 166,111 166,106 Z" />
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M54,103 C54,99 72,99 74,103 L64,104 Z M184,91 C184,87 204,87 206,91 L195,92 Z" />
+    <!-- Pink Lotus Flower on Left Lily Pad -->
+    <path
+        android:fillColor="#F48FB1"
+        android:pathData="M60,101 L57,95 L62,97 L64,93 L66,97 L71,95 L68,101 Z" />
+    <path
+        android:fillColor="#FFF59D"
+        android:pathData="M62,99 C62,97 66,97 66,99 C66,101 62,101 62,99 Z" />
+
+    <!-- 3-Tier Carved Stone Park Fountain (Centered at x=130, y=88) -->
+    <!-- Fountain Water Ripple Ring -->
+    <path
+        android:fillColor="#66E1F5FE"
+        android:pathData="M82,88 C82,78 178,78 178,88 C178,98 82,98 82,88 Z" />
+
+    <!-- Lower Molded Stone Basin (Centered at x=130, y=88) -->
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M88,88 L172,88 L166,97 C166,104 94,104 94,97 Z" />
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M86,88 C86,80 174,80 174,88 C174,96 86,96 86,88 Z" />
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M91,88 C91,82 169,82 169,88 C169,94 91,94 91,88 Z" />
+
+    <!-- Lower Fluted Pedestal Column (Centered at x=130) -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M120,54 L140,54 L143,88 L117,88 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M124,54 L136,54 L138,88 L122,88 Z" />
+
+    <!-- Middle Scalloped Stone Bowl (Centered at x=130, y=52) -->
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M102,52 L158,52 L152,59 C152,65 108,65 108,59 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M100,52 C100,46 160,46 160,52 C160,58 100,58 100,52 Z" />
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M104,52 C104,48 156,48 156,52 C156,56 104,56 104,52 Z" />
+
+    <!-- Upper Pedestal & Finial Spout (Centered at x=130) -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M123,30 L137,30 L139,52 L121,52 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M126,30 L134,30 L135,52 L125,52 Z" />
+    <!-- Upper Bowl & Acorn Finial (Centered at x=130, tip at y=16) -->
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M114,30 L146,30 L142,35 C142,39 118,39 118,35 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M112,30 C112,26 148,26 148,30 C148,34 112,34 112,30 Z M130,16 C125,20 125,27 130,29 C135,27 135,20 130,16 Z" />
+
+    <!-- Symmetric Cascading Water Curtains Between Tiers (#AAFFFFFF) -->
+    <path
+        android:fillColor="#AAFFFFFF"
+        android:pathData="M115,32 L118,32 L113,52 L110,52 Z M142,32 L145,32 L150,52 L147,52 Z M106,55 L110,55 L103,88 L99,88 Z M150,55 L154,55 L161,88 L157,88 Z" />
+</vector>

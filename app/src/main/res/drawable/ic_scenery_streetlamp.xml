@@ -1,0 +1,85 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="70dp"
+    android:height="200dp"
+    android:viewportWidth="70"
+    android:viewportHeight="200">
+
+    <!-- Ground Contact Shadow -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M14,193 C14,189 56,189 56,193 C56,197 14,197 14,193 Z" />
+
+    <!-- Warm Daytime Lantern Aura -->
+    <path
+        android:fillColor="#38FFF59D"
+        android:pathData="M35,34 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0" />
+    <path
+        android:fillColor="#55FFEE58"
+        android:pathData="M35,34 m -18,0 a 18,18 0 1,0 36,0 a 18,18 0 1,0 -36,0" />
+
+    <!-- Cast-Iron Fluted Base Plinth -->
+    <path
+        android:fillColor="#1C262B"
+        android:pathData="M20,184 L50,184 L52,194 L18,194 Z" />
+    <path
+        android:fillColor="#263238"
+        android:pathData="M23,156 L47,156 L49,184 L21,184 Z" />
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M25,156 L35,156 L36,184 L24,184 Z" />
+    <!-- Decorative Base Collar Ring -->
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M21,153 L49,153 L49,157 L21,157 Z M19,182 L51,182 L51,186 L19,186 Z" />
+
+    <!-- Main Tapered Cast-Iron Column -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M30,56 L40,56 L44,153 L26,153 Z" />
+    <!-- Column Left Highlight Bevel -->
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M31,56 L35,56 L37,153 L28,153 Z" />
+
+    <!-- Victorian Ladder Rest Crossbar & Scrolled Brackets -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M14,72 L56,72 L56,76 L14,76 Z" />
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M14,74 C14,71 18,71 18,74 C18,77 14,77 14,74 Z M52,74 C52,71 56,71 56,74 C56,77 52,77 52,74 Z" />
+    <path
+        android:strokeColor="#263238"
+        android:strokeWidth="2.4"
+        android:pathData="M22,74 C22,64 28,62 31,66 M48,74 C48,64 42,62 39,66" />
+
+    <!-- Lantern Pedestal Cup -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M26,52 L44,52 L41,58 L29,58 Z" />
+
+    <!-- 6-Sided Glass Lantern Cage -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M24,52 L18,24 L52,24 L46,52 Z" />
+    <!-- Warm Glowing Inner Bulb Flame -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,40 C31,40 30,33 35,28 C40,33 39,40 35,40 Z" />
+    <!-- Lantern Iron Frame Ribs -->
+    <path
+        android:strokeColor="#263238"
+        android:strokeWidth="2.2"
+        android:pathData="M24,52 L18,24 M35,52 L35,24 M46,52 L52,24 M18,24 L52,24 M24,52 L46,52" />
+
+    <!-- Pitched Pagoda Lantern Roof Cap & Finial Spire -->
+    <path
+        android:fillColor="#1C262B"
+        android:pathData="M13,24 L35,12 L57,24 Z" />
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M15,24 L35,13.5 L35,24 Z" />
+    <path
+        android:fillColor="#263238"
+        android:pathData="M33.5,5 L36.5,5 L37,13 L33,13 Z M35,3 C33,3 33,6 35,6 C37,6 37,3 35,3 Z" />
+</vector>

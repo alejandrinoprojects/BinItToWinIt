@@ -86,7 +86,7 @@ public class GameEngineTest {
     public void testInitialState() {
         assertEquals("TestHero", engine.getPlayerName());
         assertEquals(0, engine.getScore());
-        assertEquals(10, engine.getLives());
+        assertEquals(5, engine.getLives());
         assertEquals(0, engine.getStreak());
         assertEquals(1, engine.getMultiplier());
         assertEquals(GameEngine.State.RUNNING, engine.getState());
@@ -104,7 +104,7 @@ public class GameEngineTest {
         assertEquals(100, engine.getScore());
         assertEquals(1, engine.getItemsSorted());
         assertEquals(1, engine.getStreak());
-        assertEquals(10, engine.getLives());
+        assertEquals(5, engine.getLives());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class GameEngineTest {
                 ItemBehavior.createMediumTumbler(0.1f), 100);
         engine.handleDropOnBin(wrongItem, bioBin);
 
-        assertEquals(9, engine.getLives());
+        assertEquals(4, engine.getLives());
         assertEquals(0, engine.getStreak());
     }
 
@@ -158,7 +158,7 @@ public class GameEngineTest {
 
         engine.handleDropOnBin(kitten, bioBin);
 
-        assertEquals(9, engine.getLives());
+        assertEquals(4, engine.getLives());
         assertEquals(0, engine.getStreak());
     }
 
@@ -173,7 +173,7 @@ public class GameEngineTest {
         assertEquals(100, engine.getScore());
         assertEquals(1, engine.getItemsSorted());
         assertEquals(1, engine.getStreak());
-        assertEquals(10, engine.getLives());
+        assertEquals(5, engine.getLives());
     }
 
     @Test
@@ -185,7 +185,7 @@ public class GameEngineTest {
         engine.handleAutoCatch(recItem, bioBin);
 
         assertEquals(0, engine.getScore());
-        assertEquals(9, engine.getLives());
+        assertEquals(4, engine.getLives());
         assertEquals(0, engine.getStreak());
     }
 
@@ -197,7 +197,7 @@ public class GameEngineTest {
 
         engine.handleAutoCatch(puppy, recBin);
 
-        assertEquals(9, engine.getLives());
+        assertEquals(4, engine.getLives());
         assertEquals(0, engine.getStreak());
     }
 
@@ -207,8 +207,8 @@ public class GameEngineTest {
         WasteItem wrong = new WasteItem("wrong", "Can", WasteCategory.RECYCLABLE, 0,
                 ItemBehavior.createMediumTumbler(0.1f), 100);
 
-        // Starting with 10 lives, penalize 10 times to reach 0
-        for (int i = 0; i < 10; i++) {
+        // Starting with 5 lives, penalize 5 times to reach 0
+        for (int i = 0; i < 5; i++) {
             assertFalse(gameOverTriggered.get());
             engine.handleDropOnBin(wrong, bioBin);
         }

@@ -201,7 +201,7 @@ public class GameEngine {
     private final GameEventListener listener;
     private final EnvironmentManager environmentManager;
 
-    public static final int DEFAULT_LIVES = 10;
+    public static final int DEFAULT_LIVES = 5;
 
     private State state = State.READY;
     private int score = 0;
