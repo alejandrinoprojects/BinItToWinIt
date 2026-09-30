@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF">
+    <item>
+        <layer-list>
+            <!-- 3D Bevel Bottom Shadow Base -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/arcade_btn_shadow" />
+                    <corners android:radius="28dp" />
+                </shape>
+            </item>
+            <!-- Top Elevated Pill Button Surface with Linear Gradient -->
+            <item android:bottom="4dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:startColor="@color/primary_green_accent"
+                        android:endColor="@color/primary_green_forest"
+                        android:type="linear" />
+                    <corners android:radius="28dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="#4DFFFFFF" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</ripple>

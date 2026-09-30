@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Cat Ears -->
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M18,22 L14,8 L28,14 Z" />
+    <path
+        android:fillColor="#FF8A65"
+        android:pathData="M18,19 L16,11 L24,15 Z" />
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M46,22 L50,8 L36,14 Z" />
+    <path
+        android:fillColor="#FF8A65"
+        android:pathData="M46,19 L48,11 L40,15 Z" />
+    <!-- Cat Head -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M16,24 C14,38 22,46 32,46 C42,46 50,38 48,24 C46,16 18,16 16,24 Z" />
+    <!-- Cat Eyes -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M24,28 A3,4 0 1,1 24,36 A3,4 0 1,1 24,28 Z M40,28 A3,4 0 1,1 40,36 A3,4 0 1,1 40,28 Z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M24,30 A1.5,2.5 0 1,1 24,35 A1.5,2.5 0 1,1 24,30 Z M40,30 A1.5,2.5 0 1,1 40,35 A1.5,2.5 0 1,1 40,30 Z" />
+    <!-- Nose & Mouth -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M30,36 L34,36 L32,39 Z" />
+    <path
+        android:strokeColor="#5D4037"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M32,39 L32,42 M32,42 C30,44 28,43 27,42 M32,42 C34,44 36,43 37,42" />
+    <!-- Whiskers -->
+    <path
+        android:strokeColor="#5D4037"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M22,38 L10,36 M22,41 L12,43 M42,38 L54,36 M42,41 L52,43" />
+    <!-- Paws peeking at bottom -->
+    <path
+        android:fillColor="#FFE0B2"
+        android:pathData="M22,48 C18,48 18,54 22,54 C26,54 26,48 22,48 Z M42,48 C38,48 38,54 42,54 C46,54 46,48 42,48 Z" />
+</vector>

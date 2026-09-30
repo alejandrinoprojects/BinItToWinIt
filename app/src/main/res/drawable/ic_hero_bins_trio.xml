@@ -1,0 +1,178 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="220dp"
+    android:height="130dp"
+    android:viewportWidth="220"
+    android:viewportHeight="130">
+
+    <!-- Contact Ground Shadows for All Three Bins -->
+    <path
+        android:fillColor="#26000000"
+        android:pathData="M15,116 A30,9 0 1,0 75,116 A30,9 0 1,0 15,116 Z"/>
+    <path
+        android:fillColor="#26000000"
+        android:pathData="M145,116 A30,9 0 1,0 205,116 A30,9 0 1,0 145,116 Z"/>
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M70,122 A40,11 0 1,0 150,122 A40,11 0 1,0 70,122 Z"/>
+
+    <!-- ==================== LEFT BIN: RECYCLABLE (BLUE) ==================== -->
+    <group
+        android:pivotX="45"
+        android:pivotY="110"
+        android:rotation="-5">
+        <!-- Wheels -->
+        <path
+            android:fillColor="#263238"
+            android:pathData="M24,104 A7,7 0 1,0 38,104 A7,7 0 1,0 24,104 Z M52,104 A7,7 0 1,0 66,104 A7,7 0 1,0 52,104 Z"/>
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M28,104 A3,3 0 1,0 34,104 A3,3 0 1,0 28,104 Z M56,104 A3,3 0 1,0 62,104 A3,3 0 1,0 56,104 Z"/>
+        <!-- Body Shadow Side -->
+        <path
+            android:fillColor="#0D47A1"
+            android:pathData="M25,50 L29,106 L61,106 L65,50 Z"/>
+        <!-- Body Front Face -->
+        <path
+            android:fillColor="#1976D2"
+            android:pathData="M27,50 L31,104 L59,104 L63,50 Z"/>
+        <!-- Authentic 3-Arrow Recycling Loop on Blue Bin (120-degree Symmetry) -->
+        <group
+            android:pivotX="45"
+            android:pivotY="77"
+            android:rotation="0">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M48.5,77.2 L51,79.8 L41,79.8 L41,77.5 L37,80.8 L41,84.2 L41,82.2 L49.2,82.2 L47.2,78.2 Z"/>
+        </group>
+        <group
+            android:pivotX="45"
+            android:pivotY="77"
+            android:rotation="120">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M48.5,77.2 L51,79.8 L41,79.8 L41,77.5 L37,80.8 L41,84.2 L41,82.2 L49.2,82.2 L47.2,78.2 Z"/>
+        </group>
+        <group
+            android:pivotX="45"
+            android:pivotY="77"
+            android:rotation="240">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M48.5,77.2 L51,79.8 L41,79.8 L41,77.5 L37,80.8 L41,84.2 L41,82.2 L49.2,82.2 L47.2,78.2 Z"/>
+        </group>
+        <!-- Rim / Collar -->
+        <path
+            android:fillColor="#1565C0"
+            android:pathData="M23,45 H67 V50 H23 Z"/>
+        <!-- Lid -->
+        <path
+            android:fillColor="#1E88E5"
+            android:pathData="M21,38 C21,36 24,34 30,34 H60 C66,34 69,36 69,38 L68,45 H22 Z"/>
+        <!-- Lid Handle -->
+        <path
+            android:fillColor="#0D47A1"
+            android:pathData="M39,30 C39,28 41,27 45,27 C49,27 51,28 51,30 V34 H39 Z"/>
+    </group>
+
+    <!-- ==================== RIGHT BIN: NON-BIO (ORANGE) ==================== -->
+    <group
+        android:pivotX="175"
+        android:pivotY="110"
+        android:rotation="5">
+        <!-- Wheels -->
+        <path
+            android:fillColor="#263238"
+            android:pathData="M154,104 A7,7 0 1,0 168,104 A7,7 0 1,0 154,104 Z M182,104 A7,7 0 1,0 196,104 A7,7 0 1,0 182,104 Z"/>
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M158,104 A3,3 0 1,0 164,104 A3,3 0 1,0 158,104 Z M186,104 A3,3 0 1,0 192,104 A3,3 0 1,0 186,104 Z"/>
+        <!-- Body Shadow Side -->
+        <path
+            android:fillColor="#BF360C"
+            android:pathData="M155,50 L159,106 L191,106 L195,50 Z"/>
+        <!-- Body Front Face -->
+        <path
+            android:fillColor="#F57C00"
+            android:pathData="M157,50 L161,104 L189,104 L193,50 Z"/>
+        <!-- Modern Municipal Trash Can Emblem on Orange Bin -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M173.5,65.5 C173.5,64.8 174,64.5 175,64.5 C176,64.5 176.5,64.8 176.5,65.5 L176.5,66.5 L173.5,66.5 Z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M169,67 C169,66.2 169.8,65.8 170.8,65.8 L179.2,65.8 C180.2,65.8 181,66.2 181,67 L180.5,69 L169.5,69 Z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M170.8,70 L172.2,82.5 C172.4,83.8 173.4,84.5 174.5,84.5 L175.5,84.5 C176.6,84.5 177.6,83.8 177.8,82.5 L179.2,70 Z"/>
+        <path
+            android:strokeColor="#F57C00"
+            android:strokeWidth="0.8"
+            android:strokeLineCap="round"
+            android:pathData="M173.2,72.5 L173.8,80.5 M175,72.5 L175,80.5 M176.8,72.5 L176.2,80.5"/>
+        <!-- Rim / Collar -->
+        <path
+            android:fillColor="#E65100"
+            android:pathData="M153,45 H197 V50 H153 Z"/>
+        <!-- Lid -->
+        <path
+            android:fillColor="#FB8C00"
+            android:pathData="M151,38 C151,36 154,34 160,34 H190 C196,34 199,36 199,38 L198,45 H152 Z"/>
+        <!-- Lid Handle -->
+        <path
+            android:fillColor="#BF360C"
+            android:pathData="M169,30 C169,28 171,27 175,27 C179,27 181,28 181,30 V34 H169 Z"/>
+    </group>
+
+    <!-- ==================== CENTER HERO BIN: BIODEGRADABLE (GREEN) ==================== -->
+    <group>
+        <!-- Wheels -->
+        <path
+            android:fillColor="#212121"
+            android:pathData="M84,112 A9,9 0 1,0 102,112 A9,9 0 1,0 84,112 Z M118,112 A9,9 0 1,0 136,112 A9,9 0 1,0 118,112 Z"/>
+        <path
+            android:fillColor="#B0BEC5"
+            android:pathData="M89,112 A4,4 0 1,0 97,112 A4,4 0 1,0 89,112 Z M123,112 A4,4 0 1,0 131,112 A4,4 0 1,0 123,112 Z"/>
+        <!-- Body Shadow Side -->
+        <path
+            android:fillColor="#1B5E20"
+            android:pathData="M85,46 L90,114 L130,114 L135,46 Z"/>
+        <!-- Body Front Face Vibrant -->
+        <path
+            android:fillColor="#2E7D32"
+            android:pathData="M87,46 L92,111 L128,111 L133,46 Z"/>
+        <path
+            android:fillColor="#43A047"
+            android:pathData="M89,48 L93,109 L109,109 L107,48 Z"/>
+        <!-- Organic Seedling Sprout Emblem on Green Bin -->
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="1.8"
+            android:strokeLineCap="round"
+            android:pathData="M106,85 C107,81 108,78 110,75"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M107,80 C103,79 99,77 97,73 C100,72 105,74 107,77 Z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M109,78 C111,70 115,65 121,62 C121,69 118,77 109,78 Z"/>
+        <path
+            android:fillColor="#2E7D32"
+            android:pathData="M110,77 C112,71 115,67 119,64 C119,69 117,75 110,77 Z"/>
+        <!-- Rim / Collar -->
+        <path
+            android:fillColor="#1B5E20"
+            android:pathData="M83,40 H137 V46 H83 Z"/>
+        <!-- Lid Front -->
+        <path
+            android:fillColor="#43A047"
+            android:pathData="M80,32 C80,29 84,27 92,27 H128 C136,27 140,29 140,32 L138,40 H82 Z"/>
+        <path
+            android:fillColor="#66BB6A"
+            android:pathData="M84,31 C84,30 87,28 93,28 H127 C133,28 136,30 136,31 L135,35 H85 Z"/>
+        <!-- Lid Handle -->
+        <path
+            android:fillColor="#1B5E20"
+            android:pathData="M102,21 C102,19 104,18 110,18 C116,18 118,19 118,21 V27 H102 Z"/>
+    </group>
+
+</vector>

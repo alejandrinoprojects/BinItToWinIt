@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Translucent Glass Bulb Tear-Drop Shape -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:strokeColor="#FBC02D"
+        android:strokeWidth="1.5"
+        android:pathData="M24,34 C18,28 18,18 24,12 C30,6 40,6 46,12 C52,18 52,28 46,34 C42,38 40,42 40,46 L30,46 C30,42 28,38 24,34 Z" />
+
+    <!-- Bulb Highlight Glint -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.0"
+        android:strokeLineCap="round"
+        android:pathData="M22,18 C22,14 26,10 32,9" />
+
+    <!-- Tungsten Filament -->
+    <path
+        android:strokeColor="#E65100"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M31,44 L31,24 L33,20 L35,24 L37,20 L39,24 L39,44" />
+
+    <!-- Screw Base Metallic Threads -->
+    <path
+        android:fillColor="#90A4AE"
+        android:strokeColor="#546E7A"
+        android:strokeWidth="1.2"
+        android:pathData="M28,46 L42,46 L41,54 L29,54 Z" />
+
+    <!-- Thread Ridges -->
+    <path
+        android:strokeColor="#CFD8DC"
+        android:strokeWidth="1.2"
+        android:pathData="M28,48 L42,48 M28,51 L42,51" />
+
+    <!-- Contact Point at Bottom -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M32,54 C32,57 38,57 38,54 Z" />
+</vector>

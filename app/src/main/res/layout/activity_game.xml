@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_game_gradient">
+
+    <!-- Custom Canvas SurfaceView Game Engine Renderer -->
+    <com.example.binittowinit.game.GameView
+        android:id="@+id/game_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Heads-Up Display (HUD) Floating Layer -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hud_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Detached Floating HUD Top Bar (MaterialCardView) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/hud_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="@color/frosted_glass_surface"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="6dp"
+            app:strokeColor="@color/frosted_glass_stroke"
+            app:strokeWidth="1.2dp"
+            app:layout_constraintEnd_toStartOf="@id/btn_pause"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="10dp">
+
+                <!-- Left: Player Avatar -->
+                <ImageView
+                    android:id="@+id/iv_hud_avatar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_avatar_player"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Left Column: Player Name & Large Score -->
+                <LinearLayout
+                    android:id="@+id/layout_player_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_hud_avatar"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_hud_player"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
+                        android:maxLines="1"
+                        android:text="Player"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_hud_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:includeFontPadding="false"
+                        android:text="Score: 0"
+                        android:textColor="@color/primary_green_forest"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Center: Level & Combo Streaks & Wind Badges -->
+                <LinearLayout
+                    android:id="@+id/layout_hud_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/layout_hud_lives"
+                    app:layout_constraintStart_toEndOf="@id/layout_player_score"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_hud_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_badge_streak"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingStart="8dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="2dp"
+                        android:text="LVL 1"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_hud_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/bg_badge_wind"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingStart="7dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="2x 🔥"
+                        android:textColor="@color/brand_primary_dark"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <!-- Wind Warning Badge -->
+                    <LinearLayout
+                        android:id="@+id/layout_wind_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/bg_badge_wind"
+                        android:gravity="center_vertical"
+                        android:paddingStart="6dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="2dp"
+                        android:visibility="invisible">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="@string/wind_active"
+                            android:src="@drawable/ic_wind" />
+
+                        <TextView
+                            android:id="@+id/tv_wind_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:text="Wind!"
+                            android:textColor="@color/wind_cyan"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Right: Heart-Shaped Lives Counter Pill Badge -->
+                <LinearLayout
+                    android:id="@+id/layout_hud_lives"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_critter"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_hud_heart"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="@string/lives"
+                        android:src="@drawable/ic_heart" />
+
+                    <TextView
+                        android:id="@+id/tv_hud_lives"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="10"
+                        android:textColor="@color/heart_red"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Elevated Circular Arcade Pause Button (FAB Style) -->
+        <ImageButton
+            android:id="@+id/btn_pause"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/btn_sound_fab"
+            android:contentDescription="@string/pause"
+            android:elevation="6dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_pause"
+            app:layout_constraintBottom_toBottomOf="@id/hud_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/hud_card" />
+
+        <!-- Floating Educational Classification Tip Capsule -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layout_educational_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#F01F2937"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="10dp"
+            app:strokeColor="#4DFFFFFF"
+            app:strokeWidth="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hud_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_edu_icon"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bg_badge_edu_icon"
+                    android:contentDescription="@string/app_name"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_tip_bulb" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_edu_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Sorting Tip"
+                        android:textColor="#FFD54F"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_edu_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Tip details go here..."
+                        android:textColor="#E0E0E0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Celebratory Level Up Splash Banner -->
+        <TextView
+            android:id="@+id/tv_level_up_splash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_badge_streak"
+            android:elevation="12dp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.04"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="12dp"
+            android:text="⭐ LEVEL 2: GET READY! ⭐"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hud_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

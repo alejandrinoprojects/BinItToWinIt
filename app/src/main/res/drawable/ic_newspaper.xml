@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Folded Newspaper Pages Background -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:strokeColor="#B0BEC5"
+        android:strokeWidth="1.2"
+        android:pathData="M14,16 L46,12 L50,48 L18,52 Z" />
+
+    <!-- Top Fold Page -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#90A4AE"
+        android:strokeWidth="1.2"
+        android:pathData="M12,18 L44,14 L48,50 L16,54 Z" />
+
+    <!-- Front Page Header Banner -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M16,22 L42,19 L43,26 L17,29 Z" />
+
+    <!-- Headline text placeholder lines -->
+    <path
+        android:strokeColor="#78909C"
+        android:strokeWidth="2.0"
+        android:strokeLineCap="round"
+        android:pathData="M18,34 L40,31 M19,39 L35,37 M20,44 L38,42 M21,48 L32,47" />
+
+    <!-- Newspaper Photo Box -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M37,36 L44,35 L45,45 L38,46 Z" />
+</vector>

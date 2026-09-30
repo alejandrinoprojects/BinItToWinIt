@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Cartoon Dark Outer Silhouette Outline -->
+    <path
+        android:fillColor="#880E4F"
+        android:pathData="M8,20 L21,29 L21,20 C21,16 43,16 43,20 L43,29 L56,20 L56,42 L43,33 L43,42 C43,46 21,46 21,42 L21,33 L8,42 Z" />
+
+    <!-- Left & Right Foil Twists -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M10,22 L20,30 L10,38 Z" />
+    <path
+        android:fillColor="#FF80AB"
+        android:pathData="M11,26 L19,30 L11,34 Z" />
+
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M54,22 L44,30 L54,38 Z" />
+    <path
+        android:fillColor="#FF80AB"
+        android:pathData="M53,26 L45,30 L53,34 Z" />
+
+    <!-- Candy Center Body Vibrant Magenta -->
+    <path
+        android:fillColor="#FF4081"
+        android:pathData="M19,22 C19,18 45,18 45,22 L45,38 C45,42 19,42 19,38 Z" />
+
+    <!-- Metallic Specular Stripes -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3.0"
+        android:strokeLineCap="round"
+        android:pathData="M24,20 L33,40 M34,20 L43,40" />
+
+    <!-- Top Gloss Glare -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M22,22 L42,22" />
+</vector>

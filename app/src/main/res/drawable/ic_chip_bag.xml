@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Crimped Top Edge (Zig-zag) -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M16,16 L18,14 L20,16 L22,14 L24,16 L26,14 L28,16 L30,14 L32,16 L34,14 L36,16 L38,14 L40,16 L42,14 L44,16 L46,14 L48,16 L48,19 L16,19 Z" />
+
+    <!-- Crimped Bottom Edge (Zig-zag) -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M16,51 L48,51 L48,54 L46,56 L44,54 L42,56 L40,54 L38,56 L36,54 L34,56 L32,54 L30,56 L28,54 L26,56 L24,54 L22,56 L20,54 L18,56 L16,54 Z" />
+
+    <!-- Puffy Foil Bag Body Vibrant Red -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M16,18 C12,30 12,40 16,52 L48,52 C52,40 52,30 48,18 Z" />
+
+    <!-- Foil Specular Highlight Reflection -->
+    <path
+        android:fillColor="#EF5350"
+        android:pathData="M22,20 C18,30 18,38 22,50 L28,50 C24,38 24,30 28,20 Z" />
+
+    <!-- Bright White Diagonal Sheen Line -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M23,26 L27,44" />
+
+    <!-- Golden Snack Emblem & Potato Chip Graphic -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M32,28 C26,28 24,34 32,36 C40,38 38,44 32,44 C26,44 26,40 26,40 L28,40 C28,42 30,42 32,42 C36,42 38,38 32,36 C24,34 26,28 32,28 Z" />
+
+    <!-- Curved Crisp/Chip Graphic -->
+    <path
+        android:fillColor="#FFCA28"
+        android:strokeColor="#FFA000"
+        android:strokeWidth="1.0"
+        android:pathData="M34,38 C38,36 44,38 43,42 C40,44 36,43 34,38 Z" />
+</vector>

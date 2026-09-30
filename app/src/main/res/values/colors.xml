@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- App Brand Theme -->
+    <color name="brand_primary">#2E7D32</color>
+    <color name="brand_primary_dark">#1B5E20</color>
+    <color name="brand_accent">#00C853</color>
+    <color name="brand_surface">#EBF5EE</color>
+    <color name="brand_surface_sky">#D8F3DC</color>
+    <color name="brand_card">#FFFFFF</color>
+    <color name="brand_card_glass">#EEFFFFFF</color>
+
+    <!-- Modern Arcade Palette -->
+    <color name="primary_green_forest">#2E7D32</color>
+    <color name="primary_green_accent">#43A047</color>
+    <color name="primary_green_subtle">#E8F5E9</color>
+    <color name="arcade_blue">#1976D2</color>
+    <color name="arcade_orange">#F57C00</color>
+    <color name="frosted_glass_surface">#D9FFFFFF</color>
+    <color name="frosted_glass_stroke">#B3FFFFFF</color>
+    <color name="shadow_soft">#26000000</color>
+    <color name="arcade_btn_shadow">#1B5E20</color>
+    <color name="chip_bg_organic">#2E7D32</color>
+    <color name="chip_bg_recyclable">#1976D2</color>
+    <color name="chip_bg_nonbio">#F57C00</color>
+
+    <!-- 3 Garbage Bin Colors -->
+    <!-- 1. Biodegradable (Green) -->
+    <color name="bin_bio_primary">#2E7D32</color>
+    <color name="bin_bio_light">#4CAF50</color>
+    <color name="bin_bio_bg">#E8F5E9</color>
+    <color name="bin_bio_border">#1B5E20</color>
+    <color name="bin_bio_glow">#664CAF50</color>
+
+    <!-- 2. Recyclable (Blue) -->
+    <color name="bin_recycle_primary">#1565C0</color>
+    <color name="bin_recycle_light">#1E88E5</color>
+    <color name="bin_recycle_bg">#E3F2FD</color>
+    <color name="bin_recycle_border">#0D47A1</color>
+    <color name="bin_recycle_glow">#662196F3</color>
+
+    <!-- 3. Non-Biodegradable (Orange/Amber) -->
+    <color name="bin_nonbio_primary">#E65100</color>
+    <color name="bin_nonbio_light">#FB8C00</color>
+    <color name="bin_nonbio_bg">#FFF3E0</color>
+    <color name="bin_nonbio_border">#BF360C</color>
+    <color name="bin_nonbio_glow">#66FF9800</color>
+
+    <!-- UI & HUD Elements -->
+    <color name="heart_red">#E53935</color>
+    <color name="heart_empty">#CFD8DC</color>
+    <color name="heart_glow">#66E53935</color>
+    <color name="wind_cyan">#00ACC1</color>
+    <color name="wind_bg">#E0F7FA</color>
+    <color name="critter_pink">#E91E63</color>
+    <color name="critter_bg">#FCE4EC</color>
+    <color name="critter_glow">#88FF4081</color>
+
+    <!-- Streak Multiplier Gradient Accents -->
+    <color name="streak_fire_start">#FF9100</color>
+    <color name="streak_fire_end">#FF3D00</color>
+    <color name="streak_bg">#FFF3E0</color>
+
+    <!-- Text & Neutral -->
+    <color name="text_primary">#1A202C</color>
+    <color name="text_secondary">#4A5568</color>
+    <color name="text_muted">#718096</color>
+    <color name="divider_line">#E2E8F0</color>
+    <color name="overlay_dim">#AA000000</color>
+
+    <!-- Medals & Leaderboard Podiums -->
+    <color name="medal_gold">#FFB300</color>
+    <color name="medal_gold_bg">#FFFDE7</color>
+    <color name="medal_silver">#9E9E9E</color>
+    <color name="medal_silver_bg">#F5F5F5</color>
+    <color name="medal_bronze">#A1887F</color>
+    <color name="medal_bronze_bg">#EFEBE9</color>
+
+    <!-- Feedback Alerts -->
+    <color name="feedback_correct">#00C853</color>
+    <color name="feedback_error">#D50000</color>
+    <color name="feedback_shoo">#FF6D00</color>
+</resources>

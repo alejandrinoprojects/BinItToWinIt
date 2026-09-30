@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Plastic Fork (White/Grey) -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M22,12 L22,26 C22,30 25,32 27,34 L27,52 L31,52 L31,34 C33,32 36,30 36,26 L36,12 L33,12 L33,22 L31,22 L31,12 L27,12 L27,22 L25,22 L25,12 Z" />
+    <!-- Plastic Straw Bent (Striped Red/White) -->
+    <path
+        android:strokeColor="#FF5252"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M48,12 L44,22 L38,52" />
+</vector>

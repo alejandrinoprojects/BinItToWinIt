@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Peeled Open Lid -->
+    <path
+        android:fillColor="#90A4AE"
+        android:strokeColor="#78909C"
+        android:strokeWidth="1.2"
+        android:pathData="M20,18 C20,12 36,8 44,14 C42,20 30,22 20,18 Z" />
+
+    <!-- Open Rim Oval Cavity -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M20,20 C20,16 44,16 44,20 C44,24 20,24 20,20 Z" />
+
+    <!-- Can Cylindrical Body Metallic Steel -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M20,20 L44,20 L44,52 C44,56 20,56 20,52 Z" />
+
+    <!-- Cylindrical Highlights -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M24,20 L30,20 L30,53 L24,53 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M26,20 L28,20 L28,53 L26,53 Z" />
+
+    <!-- Horizontal Structural Ribs on Tin Can -->
+    <path
+        android:strokeColor="#78909C"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M20,28 C26,30 38,30 44,28 M20,36 C26,38 38,38 44,36 M20,44 C26,46 38,46 44,44" />
+
+    <!-- Top & Bottom Rim Rings -->
+    <path
+        android:strokeColor="#546E7A"
+        android:strokeWidth="1.5"
+        android:pathData="M20,20 C20,24 44,24 44,20 M20,52 C20,56 44,56 44,52" />
+</vector>

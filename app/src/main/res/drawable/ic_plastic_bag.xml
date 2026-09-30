@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Bold Dark Silhouette Outline -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M16,6 C13,6 10,12 10,18 L10,24 C6,27 6,40 8,50 C10,58 20,60 32,60 C44,60 54,58 56,50 C58,40 58,27 54,24 L54,18 C54,12 51,6 48,6 C44,6 41,12 41,18 L39,20 C36,19 28,19 25,20 L23,18 C23,12 20,6 16,6 Z" />
+
+    <!-- Bag Main Translucent Body White/Cyan -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M18,18 C14,24 8,28 10,48 C12,56 22,58 32,58 C42,58 52,56 54,48 C56,28 50,24 46,18 C40,23 24,23 18,18 Z" />
+
+    <!-- Left Handle Loop -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M17,8 C15,8 12,12 12,18 L15,18 C15,13 16,10 17,10 C18,10 19,13 19,18 L22,18 C22,12 19,8 17,8 Z" />
+
+    <!-- Right Handle Loop -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M47,8 C45,8 42,12 42,18 L45,18 C45,13 46,10 47,10 C48,10 49,13 49,18 L52,18 C52,12 49,8 47,8 Z" />
+
+    <!-- Shading Crinkles and Creases -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M16,24 C14,35 17,47 21,55 L24,54 C20,46 17,35 19,25 Z M48,24 C50,35 47,47 43,55 L40,54 C44,46 47,35 45,25 Z" />
+
+    <!-- Iconic Red Grocery "THANK YOU" Smiley Print -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M32,29 C26,29 22,33 22,39 C22,45 26,49 32,49 C38,49 42,45 42,39 C42,33 38,29 32,29 Z M32,31 C36.5,31 40,34.5 40,39 C40,43.5 36.5,47 32,47 C27.5,47 24,43.5 24,39 C24,34.5 27.5,31 32,31 Z" />
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M27,36 A1.5,1.5 0 1,0 27,39 A1.5,1.5 0 1,0 27,36 Z M37,36 A1.5,1.5 0 1,0 37,39 A1.5,1.5 0 1,0 37,36 Z" />
+    <path
+        android:strokeColor="#E53935"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M28,42 C30,45 34,45 36,42" />
+</vector>

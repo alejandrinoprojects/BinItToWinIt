@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Bulb Glass Outline & Fill -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M12,2 C8.13,2 5,5.13 5,9 C5,11.38 6.19,13.47 8,14.74 V17 C8,17.55 8.45,18 9,18 H15 C15.55,18 16,17.55 16,17 V14.74 C17.81,13.47 19,11.38 19,9 C19,5.13 15.87,2 12,2 Z" />
+    <!-- Bulb Highlight Shine -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M8,6 C8.5,4.5 10,3.5 11.5,3.2 C11.8,3.1 12,2.8 11.9,2.5 C11.8,2.2 11.5,2 11.2,2.1 C9.2,2.5 7.4,3.7 6.8,5.6 C6.7,5.9 6.8,6.2 7.1,6.3 C7.4,6.4 7.9,6.3 8,6 Z" />
+    <!-- Bulb Screw Base -->
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M9,19 H15 V20 H9 Z M10,21 H14 V22 H10 Z" />
+    <!-- Filament Glow Center -->
+    <path
+        android:fillColor="#FF8F00"
+        android:pathData="M12,7 L13,10 L11,10 Z" />
+</vector>

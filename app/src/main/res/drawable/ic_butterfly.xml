@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Butterfly Wings (Vibrant Purple / Cyan) -->
+    <!-- Top Left Wing -->
+    <path
+        android:fillColor="#AB47BC"
+        android:pathData="M31,24 C28,12 12,8 10,22 C8,32 24,38 31,34 Z" />
+    <path
+        android:fillColor="#CE93D8"
+        android:pathData="M28,22 C24,14 15,12 14,20 C13,26 22,30 28,26 Z" />
+    <!-- Top Right Wing -->
+    <path
+        android:fillColor="#AB47BC"
+        android:pathData="M33,24 C36,12 52,8 54,22 C56,32 40,38 33,34 Z" />
+    <path
+        android:fillColor="#CE93D8"
+        android:pathData="M36,22 C40,14 49,12 50,20 C51,26 42,30 36,26 Z" />
+    <!-- Bottom Wings -->
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M31,34 C24,36 14,40 18,50 C22,58 30,46 31,38 Z" />
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M33,34 C40,36 50,40 46,50 C42,58 34,46 33,38 Z" />
+    <!-- Slender Body -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M31,16 C31,14 33,14 33,16 L33,48 C33,50 31,50 31,48 Z" />
+    <!-- Antennae -->
+    <path
+        android:strokeColor="#212121"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M32,16 C30,10 24,8 22,10 M32,16 C34,10 40,8 42,10" />
+</vector>

@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Apple Core Center Flesh -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M24,14 C30,12 34,12 40,14 C42,16 43,20 38,28 C36,32 36,36 38,40 C43,48 42,52 40,54 C34,56 30,56 24,54 C22,52 21,48 26,40 C28,36 28,32 26,28 C21,20 22,16 24,14 Z" />
+    <!-- Apple Skin Top & Bottom (Red remnants) -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M22,14 C28,11 36,11 42,14 C44,18 41,21 38,23 C34,20 30,20 26,23 C23,21 20,18 22,14 Z" />
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M22,54 C28,57 36,57 42,54 C44,50 41,47 38,45 C34,48 30,48 26,45 C23,47 20,50 22,54 Z" />
+    <!-- Stem -->
+    <path
+        android:strokeColor="#5D4037"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M32,12 C33,7 37,5 40,4" />
+    <!-- Seeds -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M30,31 C32,31 33,33 32,35 C31,36 29,36 29,34 C29,32 30,31 30,31 Z M34,35 C36,35 37,37 36,39 C35,40 33,40 33,38 C33,36 34,35 34,35 Z" />
+</vector>

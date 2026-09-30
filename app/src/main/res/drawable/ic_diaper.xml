@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Diaper White Padded Body -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:strokeColor="#B0BEC5"
+        android:strokeWidth="1.2"
+        android:pathData="M16,22 C14,28 14,44 24,52 C32,56 40,52 48,44 C52,38 52,28 48,22 C42,26 38,28 32,28 C26,28 22,26 16,22 Z" />
+
+    <!-- Soft Inner Absorbent Cushion -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,26 C18,32 18,42 26,48 C32,51 38,48 44,42 C46,38 46,30 42,26 C38,28 34,29 32,29 C30,29 26,28 20,26 Z" />
+
+    <!-- Yellow Sticky Fastener Tabs -->
+    <path
+        android:fillColor="#FDD835"
+        android:strokeColor="#FBC02D"
+        android:strokeWidth="1.0"
+        android:pathData="M14,20 L22,18 L24,24 L16,26 Z M50,20 L42,18 L40,24 L48,26 Z" />
+
+    <!-- Elastic Leg Gather Ruffles -->
+    <path
+        android:strokeColor="#90A4AE"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M20,38 C22,42 26,46 30,48 M44,38 C42,42 38,46 34,48" />
+</vector>

@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Feathery Green Tops -->
+    <path
+        android:fillColor="#43A047"
+        android:strokeColor="#2E7D32"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M24,20 C20,12 16,8 14,6 C18,10 22,14 26,18 M30,18 C30,10 28,6 26,4 C30,8 32,12 32,18 M34,18 C38,10 42,6 46,4 C42,8 38,12 36,18" />
+
+    <!-- Orange Carrot Root Base -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M22,20 C22,18 40,18 40,20 C42,28 38,48 33,58 C32,60 30,60 29,58 C24,48 20,28 22,20 Z" />
+
+    <!-- Carrot Highlight Shading -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M25,22 C25,20 37,20 37,22 C38,28 36,44 32,54 C31,55 30,55 30,54 C26,44 24,28 25,22 Z" />
+
+    <!-- Horizontal Root Lines -->
+    <path
+        android:strokeColor="#E65100"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M26,28 L35,28 M25,36 L34,36 M27,44 L33,44" />
+</vector>

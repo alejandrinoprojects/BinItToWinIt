@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Dark Cartoon Silhouette Outline for High Contrast -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M32,6 L56,19 L56,45 L32,58 L8,45 L8,19 Z" />
+
+    <!-- Isometric Top Face - Cardboard Kraft -->
+    <path
+        android:fillColor="#E0B075"
+        android:pathData="M32,8 L54,20 L32,32 L10,20 Z" />
+
+    <!-- Isometric Left Face - Shaded Cardboard -->
+    <path
+        android:fillColor="#C68A4C"
+        android:pathData="M10,20 L32,32 L32,55 L10,43 Z" />
+
+    <!-- Isometric Right Face - Deep Shadow Cardboard -->
+    <path
+        android:fillColor="#A06935"
+        android:pathData="M32,32 L54,20 L54,43 L32,55 Z" />
+
+    <!-- Packaging Tape Strip Running Across Flaps -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M23,15 L41,25 L37,28 L19,17 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M27,29 L37,35 L37,45 L27,39 Z" />
+
+    <!-- White Shipping Address Label / Barcode on Left Face -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M14,28 L24,34 L24,42 L14,36 Z" />
+    <path
+        android:fillColor="#424242"
+        android:pathData="M16,33 L22,36.5 L22,38 L16,34.5 Z M16,39 L20,41.5 L20,42 L16,39.5 Z" />
+
+    <!-- Universal 3-Arrow Recycling Stamp on Right Face -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M40,29 L46,26 L46,31 Z M48,34 L43,39 L47,38 Z M37,38 L39,32 L42,35 Z" />
+</vector>

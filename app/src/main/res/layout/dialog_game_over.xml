@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="12dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="26dp">
+
+        <!-- Trophy / Game Over Themed Header Badge -->
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_badge_critter"
+            android:contentDescription="@string/game_over"
+            android:padding="12dp"
+            android:src="@drawable/ic_heart" />
+
+        <!-- Game Over Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/game_over"
+            android:textColor="@color/heart_red"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- New High Score Badge -->
+        <TextView
+            android:id="@+id/tv_dialog_highscore_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_badge_wind"
+            android:fontFamily="sans-serif-bold"
+            android:paddingStart="14dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="4dp"
+            android:text="@string/new_high_score"
+            android:textColor="@color/medal_gold"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!-- Final Score Display -->
+        <TextView
+            android:id="@+id/tv_dialog_final_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Score: 0"
+            android:textColor="@color/text_primary"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- Stats Breakdown Pill Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_input_player"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="♻️ Waste Items Sorted:"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_dialog_items_sorted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="0"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#DCEAD7" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="🐾 Critters Shooed:"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_dialog_critters_rescued"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="0"
+                    android:textColor="@color/primary_green_forest"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Play Again Button (High Priority CTA) -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_play_again"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_primary_arcade"
+            android:drawableStart="@drawable/ic_refresh"
+            android:drawablePadding="10dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@string/play_again"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!-- Leaderboard Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_leaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/btn_secondary_arcade"
+            android:drawableStart="@drawable/ic_trophy"
+            android:drawablePadding="10dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@string/leaderboard"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Main Menu Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_quit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/btn_secondary_arcade"
+            android:text="@string/back_to_menu"
+            android:textAllCaps="false"
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

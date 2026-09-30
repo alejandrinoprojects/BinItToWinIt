@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Fish Head -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M12,32 C12,24 22,22 26,26 L26,38 C22,42 12,40 12,32 Z" />
+    <!-- Eye Hole -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M18,29 A2.5,2.5 0 1,1 18,34 A2.5,2.5 0 1,1 18,29 Z" />
+    <!-- Spine Line -->
+    <path
+        android:strokeColor="#90A4AE"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M24,32 L54,32" />
+    <!-- Rib Bones -->
+    <path
+        android:strokeColor="#B0BEC5"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M32,20 L30,44 M40,22 L38,42 M48,25 L46,39" />
+    <!-- Tail Fin -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M52,32 L60,20 L57,32 L60,44 Z" />
+</vector>

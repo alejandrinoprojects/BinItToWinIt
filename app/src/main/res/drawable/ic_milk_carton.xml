@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Carton Gable Peak (Top Fold) -->
+    <path
+        android:fillColor="#1E88E5"
+        android:pathData="M24,10 L40,10 L38,18 L26,18 Z" />
+
+    <!-- Sloped Roof Left & Right -->
+    <path
+        android:fillColor="#42A5F5"
+        android:pathData="M26,18 L38,18 L44,26 L20,26 Z" />
+
+    <!-- Carton Body Main (Clean White Paperboard) -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:strokeColor="#90A4AE"
+        android:strokeWidth="1.2"
+        android:pathData="M20,26 L44,26 L44,56 C44,58 42,58 40,58 L24,58 C22,58 20,58 20,56 Z" />
+
+    <!-- Cyan Decorative Milk Wave Band -->
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M20,38 C26,35 34,42 44,38 L44,48 L20,48 Z" />
+
+    <!-- Cute Milk Drop Icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,40 C32,38 34,35 34,35 C34,35 36,38 36,40 C36,42 34,43 33,43 C32,43 32,42 32,40 Z" />
+
+    <!-- Gable Crease Line -->
+    <path
+        android:strokeColor="#1565C0"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M32,10 L32,26" />
+</vector>

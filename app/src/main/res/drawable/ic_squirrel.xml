@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Bushy Squirrel Tail -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M16,46 C10,40 8,24 16,14 C24,4 32,8 30,18 C28,26 24,34 26,44 Z" />
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M18,44 C14,38 12,24 18,16 C23,10 28,12 27,20 C25,26 22,34 24,42 Z" />
+    <!-- Squirrel Body -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M24,36 C24,28 32,24 38,26 C44,28 46,38 44,48 C40,54 30,54 26,48 Z" />
+    <!-- Head & Ears -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M34,22 C34,16 44,16 46,22 C47,26 43,30 38,30 C34,30 34,26 34,22 Z" />
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M35,16 L38,10 L41,16 Z" />
+    <!-- Squirrel Eye -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M40,20 A2,2 0 1,1 40,24 A2,2 0 1,1 40,20 Z" />
+    <!-- Holding an Acorn in paws -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M40,32 C40,30 46,30 46,32 C46,36 40,36 40,32 Z" />
+</vector>

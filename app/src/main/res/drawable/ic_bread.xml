@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Bread Crust Outer -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M14,24 C14,14 22,12 32,12 C42,12 50,14 50,24 L50,48 C50,52 46,54 42,54 L22,54 C18,54 14,52 14,48 Z" />
+    <!-- Bread Crumb Inner -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:pathData="M18,24 C18,17 24,15 32,15 C40,15 46,17 46,24 L46,47 C46,49 43,51 40,51 L24,51 C21,51 18,49 18,47 Z" />
+    <!-- Air Pores / Crumbs -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M24,26 A2,2 0 1,1 24,30 A2,2 0 1,1 24,26 Z M36,34 A2.5,2.5 0 1,1 36,39 A2.5,2.5 0 1,1 36,34 Z M28,42 A2,2 0 1,1 28,46 A2,2 0 1,1 28,42 Z" />
+</vector>

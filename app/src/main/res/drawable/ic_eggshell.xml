@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Ground Shadow -->
+    <path
+        android:fillColor="#15000000"
+        android:pathData="M14,54 C20,51 44,51 50,54 C53,56 46,58 32,58 C18,58 11,56 14,54 Z" />
+
+    <!-- Left Broken Half -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:strokeColor="#FFE082"
+        android:strokeWidth="1.2"
+        android:pathData="M16,48 C12,38 15,26 24,24 L27,31 L30,25 L32,33 C26,45 22,50 16,48 Z" />
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M24,24 L27,31 L30,25 L32,33 C30,34 26,30 24,24 Z" />
+
+    <!-- Right Larger Broken Shell Half -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:strokeColor="#FFD54F"
+        android:strokeWidth="1.2"
+        android:pathData="M32,32 L35,22 L40,28 L44,20 L48,27 C54,34 54,46 46,52 C38,56 30,52 32,32 Z" />
+    <!-- Inner Pale Cavity -->
+    <path
+        android:fillColor="#FFFDE7"
+        android:pathData="M34,32 L36,25 L39,29 L43,24 L46,29 C49,35 48,46 42,49 C36,51 32,44 34,32 Z" />
+
+    <!-- Fine Outline Detail -->
+    <path
+        android:strokeColor="#FFA000"
+        android:strokeWidth="1.0"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M24,24 L27,31 L30,25 L32,33 M32,32 L35,22 L40,28 L44,20 L48,27" />
+</vector>

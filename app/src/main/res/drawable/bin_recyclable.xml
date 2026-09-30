@@ -1,0 +1,144 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="130dp"
+    android:viewportWidth="100"
+    android:viewportHeight="130">
+
+    <!-- Contact Ground Shadow -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M12,122 C12,117 88,117 88,122 C88,127 12,127 12,122 Z" />
+
+    <!-- Wheel Axle Bar -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M22,111 L78,111 L78,115 L22,115 Z" />
+
+    <!-- Left Wheel Assembly -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M12,113 C12,107.5 16.5,103 22,103 C27.5,103 32,107.5 32,113 C32,118.5 27.5,123 22,123 C16.5,123 12,118.5 12,113 Z" />
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M16,113 C16,109.7 18.7,107 22,107 C25.3,107 28,109.7 28,113 C28,116.3 25.3,119 22,119 C18.7,119 16,116.3 16,113 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M20,113 C20,111.9 20.9,111 22,111 C23.1,111 24,111.9 24,113 C24,114.1 23.1,115 22,115 C20.9,115 20,114.1 20,113 Z" />
+
+    <!-- Right Wheel Assembly -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M68,113 C68,107.5 72.5,103 78,103 C83.5,103 88,107.5 88,113 C88,118.5 83.5,123 78,123 C72.5,123 68,118.5 68,113 Z" />
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M72,113 C72,109.7 74.7,107 78,107 C81.3,107 84,109.7 84,113 C84,116.3 81.3,119 78,119 C74.7,119 72,116.3 72,113 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M76,113 C76,111.9 76.9,111 78,111 C79.1,111 80,111.9 80,113 C80,114.1 79.1,115 78,115 C76.9,115 76,114.1 76,113 Z" />
+
+    <!-- Open Lid Structure (Securely Hinged at Rear Collar) -->
+    <!-- Solid Rear Hinge Brackets connecting lid to rim -->
+    <path
+        android:fillColor="#082959"
+        android:pathData="M22,14 L30,14 L30,26 L22,26 Z M70,14 L78,14 L78,26 L70,26 Z" />
+    <!-- Lid Grab Handle -->
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M40,3 L60,3 L60,7 L40,7 Z" />
+    <!-- Lid Outer Shell -->
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M22,7 L78,7 L85,25 L15,25 Z" />
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M24,9 L76,9 L82,24 L18,24 Z" />
+    <!-- Lid Underside Structural Ribs -->
+    <path
+        android:fillColor="#1E88E5"
+        android:pathData="M34,9 L38,9 L36,24 L32,24 Z M48,9 L52,9 L52,24 L48,24 Z M62,9 L66,9 L68,24 L64,24 Z" />
+
+    <!-- Bin Body Outer Shell Base (Seamless from y=24 down to y=116) -->
+    <path
+        android:fillColor="#082959"
+        android:pathData="M15,24 L85,24 L75,116 L25,116 Z" />
+
+    <!-- Bin Body Main Base Color -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M16,25 L84,25 L74,114 L26,114 Z" />
+
+    <!-- 3D Lighting - Center Body Highlight -->
+    <path
+        android:fillColor="#1E88E5"
+        android:pathData="M34,25 L66,25 L60,114 L40,114 Z" />
+
+    <!-- 3D Lighting - Right Body Shadow -->
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M66,25 L84,25 L74,114 L60,114 Z" />
+
+    <!-- Molded Vertical Reinforcement Ribs -->
+    <path
+        android:fillColor="#42A5F5"
+        android:pathData="M44,38 L46,38 L44,106 L42,106 Z" />
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M46,38 L48,38 L46,106 L44,106 Z" />
+    <path
+        android:fillColor="#42A5F5"
+        android:pathData="M52,38 L54,38 L54,106 L52,106 Z" />
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M54,38 L56,38 L56,106 L54,106 Z" />
+
+    <!-- Upper Collar Rim (Heavy-Duty Front Lip) -->
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M12,24 L88,24 L86,34 L14,34 Z" />
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M14,25 L86,25 L85,28 L15,28 Z" />
+
+    <!-- Open Hopper Cavity (Perspective Interior Depth) -->
+    <path
+        android:fillColor="#081D3B"
+        android:pathData="M16,20 C16,16 84,16 84,20 C84,25 16,25 16,20 Z" />
+
+    <!-- Front Municipal Emblem - White Circular Plate -->
+    <path
+        android:fillColor="#22000000"
+        android:pathData="M50,75 m -20,0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,73 m -19,0 a 19,19 0 1,0 38,0 a 19,19 0 1,0 -38,0" />
+    <path
+        android:strokeColor="#E3F2FD"
+        android:strokeWidth="1.2"
+        android:pathData="M50,73 m -18,0 a 18,18 0 1,0 36,0 a 18,18 0 1,0 -36,0" />
+
+    <!-- Universal 3-Arrow Recycling Loop (120-degree Perfect Symmetry #1565C0) -->
+    <group
+        android:pivotX="50"
+        android:pivotY="73"
+        android:rotation="0">
+        <path
+            android:fillColor="#1565C0"
+            android:pathData="M55,73.5 L58.5,77 L45,77 L45,74.2 L39.5,78.5 L45,82.8 L45,80 L56,80 L53.5,75 Z" />
+    </group>
+    <group
+        android:pivotX="50"
+        android:pivotY="73"
+        android:rotation="120">
+        <path
+            android:fillColor="#1565C0"
+            android:pathData="M55,73.5 L58.5,77 L45,77 L45,74.2 L39.5,78.5 L45,82.8 L45,80 L56,80 L53.5,75 Z" />
+    </group>
+    <group
+        android:pivotX="50"
+        android:pivotY="73"
+        android:rotation="240">
+        <path
+            android:fillColor="#1565C0"
+            android:pathData="M55,73.5 L58.5,77 L45,77 L45,74.2 L39.5,78.5 L45,82.8 L45,80 L56,80 L53.5,75 Z" />
+    </group>
+</vector>

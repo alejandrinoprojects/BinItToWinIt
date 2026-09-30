@@ -1,0 +1,53 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Cartoon Dark Outer Silhouette Outline for High Contrast -->
+    <path
+        android:fillColor="#01579B"
+        android:pathData="M27,4 L37,4 C38.1,4 39,4.9 39,6 L39,10 L40.5,14 C43.5,17.5 45,21.5 45,25 L44,54 C44,58.4 40.4,61 36,61 L28,61 C23.6,61 20,58.4 20,54 L19,25 C19,21.5 20.5,17.5 23.5,14 L25,10 L25,6 C25,4.9 25.9,4 27,4 Z" />
+
+    <!-- Plastic Bottle Body Translucent Cyan -->
+    <path
+        android:fillColor="#E0F7FA"
+        android:pathData="M25,17 C23,17 21,21 21,25 L22,54 C22,57 25,58.5 28,58.5 L36,58.5 C39,58.5 42,57 42,54 L43,25 C43,21 41,17 39,17 Z" />
+
+    <!-- Translucent Shading / Water Level -->
+    <path
+        android:fillColor="#B2EBF2"
+        android:pathData="M22,35 L42,35 L42,53 C42,56 39,58.5 36,58.5 L28,58.5 C25,58.5 22,56 22,53 Z" />
+
+    <!-- Bottle Neck -->
+    <path
+        android:fillColor="#80DEEA"
+        android:pathData="M28,10 L36,10 L38,17 L26,17 Z" />
+
+    <!-- Blue Cap Ribbed -->
+    <path
+        android:fillColor="#0288D1"
+        android:pathData="M27,6 L37,6 L37,11 L27,11 Z" />
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M28,7 L36,7 L36,9 L28,9 Z" />
+
+    <!-- Recycling Brand Label Around Middle -->
+    <path
+        android:fillColor="#0288D1"
+        android:pathData="M21.5,30 L42.5,30 L42.5,41 L21.5,41 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M29,33 L35,33 L35,34 L29,34 Z M28,36 L36,36 L36,38 L28,38 Z" />
+
+    <!-- Crisp Specular Reflection Glares -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:pathData="M24,20 L24,53" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M27,24 L27,48" />
+</vector>

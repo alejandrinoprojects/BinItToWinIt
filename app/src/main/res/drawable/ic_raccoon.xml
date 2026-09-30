@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Raccoon Ears -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M16,14 L12,4 L24,10 Z M48,14 L52,4 L40,10 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,12 L14,7 L21,10 Z M48,12 L50,7 L43,10 Z" />
+    <!-- Raccoon Face Main Grey -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M14,18 C10,34 18,48 32,48 C46,48 54,34 50,18 C46,12 18,12 14,18 Z" />
+    <!-- Iconic Black Bandit Mask -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M12,24 C18,22 28,26 32,28 C36,26 46,22 52,24 C50,34 42,36 32,32 C22,36 14,34 12,24 Z" />
+    <!-- White Eye Rings & Highlights -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,25 A3,3.5 0 1,1 22,32 A3,3.5 0 1,1 22,25 Z M42,25 A3,3.5 0 1,1 42,32 A3,3.5 0 1,1 42,25 Z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M22,26 A2,2.5 0 1,1 22,31 A2,2.5 0 1,1 22,26 Z M42,26 A2,2.5 0 1,1 42,31 A2,2.5 0 1,1 42,26 Z" />
+    <!-- White Snout -->
+    <path
+        android:fillColor="#FAFAFA"
+        android:pathData="M26,35 C26,31 38,31 38,35 C38,44 26,44 26,35 Z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M29,35 C29,33 35,33 35,35 L32,38 Z" />
+</vector>

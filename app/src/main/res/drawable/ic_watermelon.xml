@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Outer Green Rind -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M8,26 C12,48 26,56 46,54 C54,53 58,48 56,42 C38,44 26,38 18,22 C14,18 8,20 8,26 Z" />
+
+    <!-- Light Green Inner Rind Layer -->
+    <path
+        android:fillColor="#A5D6A7"
+        android:pathData="M14,24 C18,44 28,50 46,48 C51,47 54,44 52,40 C38,41 28,36 21,22 C18,19 14,20 14,24 Z" />
+
+    <!-- Eaten Red Fruit Flesh Remnant -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M20,24 C23,38 32,44 48,42 C49,38 48,34 44,30 C36,30 28,26 24,20 C22,19 20,20 20,24 Z" />
+
+    <!-- Dark Seeds -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M30,34 A1.8,2.2 0 1,1 30,34.01 Z M38,36 A1.8,2.2 0 1,1 38,36.01 Z M44,34 A1.8,2.2 0 1,1 44,34.01 Z" />
+
+    <!-- Dark Rind Stripes -->
+    <path
+        android:strokeColor="#1B5E20"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M16,38 C20,44 26,48 34,50 M38,51 C44,51 48,49 52,45" />
+</vector>

@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Top Rim -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M22,12 C22,9 42,9 42,12 C42,15 22,15 22,12 Z" />
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M28,11 L36,11 L35,13 L29,13 Z" />
+    <!-- Can Cylinder Body (Red Soda Can) -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M22,12 L42,12 L42,50 C42,54 22,54 22,50 Z" />
+    <!-- White Wave Swirl on Can -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:pathData="M23,28 C28,24 36,36 41,30" />
+    <!-- Metallic Specular Shine -->
+    <path
+        android:fillColor="#EF5350"
+        android:pathData="M24,14 L27,14 L27,48 L24,48 Z" />
+    <!-- Bottom Rim -->
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M24,50 C24,53 40,53 40,50 L40,52 C40,55 24,55 24,52 Z" />
+</vector>

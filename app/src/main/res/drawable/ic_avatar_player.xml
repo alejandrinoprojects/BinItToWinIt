@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Outer Circular Badge -->
+    <path
+        android:fillColor="@color/primary_green_forest"
+        android:pathData="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2Z"/>
+    <!-- Cute Hero Avatar (Head & Cap) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,6A3.5,3.5 0 1,0 15.5,9.5A3.5,3.5 0 0,0 12,6ZM6.5,18.5C6.5,15.8 10,14.5 12,14.5C14,14.5 17.5,15.8 17.5,18.5V19.5H6.5Z"/>
+    <path
+        android:fillColor="@color/primary_green_accent"
+        android:pathData="M12,15.8C10.5,15.8 8.5,16.6 8.1,18.2H15.9C15.5,16.6 13.5,15.8 12,15.8Z"/>
+</vector>

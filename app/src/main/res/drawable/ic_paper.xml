@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Dark Contrast Outline -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M14,18 L24,8 L44,10 L54,22 L52,44 L40,54 L20,54 L10,40 Z" />
+
+    <!-- Crumpled Paper Main White Body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,19 L25,10 L43,12 L52,23 L50,43 L39,52 L21,52 L12,39 Z" />
+
+    <!-- Creased Paper Facets / Shading -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M25,10 L34,26 L16,19 Z" />
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M34,26 L43,12 L52,23 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M34,26 L46,38 L50,43 L52,23 Z" />
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M34,26 L26,42 L39,52 L46,38 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M34,26 L12,39 L21,52 L26,42 Z" />
+
+    <!-- Notebook Paper Ruled Lines (Cyan/Blue) -->
+    <path
+        android:strokeColor="#29B6F6"
+        android:strokeWidth="1.2"
+        android:pathData="M18,16 L23,12 M20,24 L31,21 M38,18 L48,20 M16,32 L30,30 M38,30 L48,32 M24,46 L36,44 M15,41 L21,48" />
+
+    <!-- Notebook Red Margin Line -->
+    <path
+        android:strokeColor="#EF5350"
+        android:strokeWidth="1.2"
+        android:pathData="M22,12 L28,38 L25,48" />
+</vector>
