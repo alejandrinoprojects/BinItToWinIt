@@ -1,6 +1,8 @@
 package com.example.binittowinit.game;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.example.binittowinit.R;
 import com.example.binittowinit.audio.ISoundManager;
 import com.example.binittowinit.audio.SoundManager;
 import com.example.binittowinit.model.GarbageBin;
@@ -68,14 +71,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private final Map<Integer, Drawable> drawableCache = new HashMap<>();
 
     // --- Park Scenery Graphics Pipeline ---
+    private Bitmap rawParkBackdropBitmap = null;
+    private Bitmap scaledParkBackdropBitmap = null;
     private Paint skyPaint;
     private Paint sunGlowPaint;
     private Paint sunCorePaint;
+    private Paint sunbeamPaint;
+    private Paint skylineFarPaint;
+    private Paint skylineMidPaint;
+    private Paint skylineWindowPaint;
     private Paint cloudPaint;
     private Paint cloudShadowPaint;
     private Paint distantHillPaint;
     private Paint midHillPaint;
     private Paint parkLawnPaint;
+    private Paint stonePathPaint;
+    private Paint stoneSlabPaint;
+    private Paint pondRimPaint;
+    private Paint pondWaterPaint;
+    private Paint pondRipplePaint;
+    private Paint fountainStonePaint;
+    private Paint fountainSprayPaint;
+    private Paint benchWoodPaint;
+    private Paint benchWoodLightPaint;
+    private Paint ironWorkPaint;
+    private Paint lampGlowPaint;
+    private Paint lampGlassPaint;
     private Paint fencePostPaint;
     private Paint fenceRailPaint;
     private Paint treeTrunkPaint;
@@ -96,6 +117,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private final Path distantHillPath = new Path();
     private final Path midHillPath = new Path();
     private final Path lawnPath = new Path();
+    private final Path windingStonePath = new Path();
+    private final Path sunbeamPath = new Path();
+    private final Path scratchPath = new Path();
     private float cloudDrift = 0f;
 
     // --- Touch Interaction & Gesture Tracking ---
@@ -210,6 +234,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         sunGlowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         sunCorePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+        sunbeamPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        sunbeamPaint.setColor(0x16FFF9C4);
+
+        skylineFarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        skylineFarPaint.setColor(0xFF90CAF9);
+
+        skylineMidPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        skylineMidPaint.setColor(0xFF78B7E2);
+
+        skylineWindowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        skylineWindowPaint.setColor(0x66E1F5FE);
+
         cloudPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         cloudPaint.setColor(Color.WHITE);
 
@@ -224,6 +260,48 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         parkLawnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         parkLawnPaint.setColor(0xFF4CAF50);
+
+        stonePathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        stonePathPaint.setColor(0xFFD7CCC8);
+
+        stoneSlabPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        stoneSlabPaint.setColor(0xFFEFEBE9);
+
+        pondRimPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        pondRimPaint.setColor(0xFFCFD8DC);
+
+        pondWaterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        pondWaterPaint.setColor(0xFF29B6F6);
+
+        pondRipplePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        pondRipplePaint.setStyle(Paint.Style.STROKE);
+        pondRipplePaint.setStrokeWidth(2.5f);
+        pondRipplePaint.setColor(0x88E1F5FE);
+
+        fountainStonePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fountainStonePaint.setColor(0xFFECEFF1);
+
+        fountainSprayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fountainSprayPaint.setStyle(Paint.Style.STROKE);
+        fountainSprayPaint.setStrokeWidth(3f);
+        fountainSprayPaint.setStrokeCap(Paint.Cap.ROUND);
+        fountainSprayPaint.setColor(0xCCFFFFFF);
+
+        benchWoodPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        benchWoodPaint.setColor(0xFF8D6E63);
+
+        benchWoodLightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        benchWoodLightPaint.setColor(0xFFA1887F);
+
+        ironWorkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        ironWorkPaint.setColor(0xFF263238);
+        ironWorkPaint.setStrokeWidth(3.5f);
+
+        lampGlowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        lampGlowPaint.setColor(0x44FFF59D);
+
+        lampGlassPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        lampGlassPaint.setColor(0xFFFFF9C4);
 
         fencePostPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fencePostPaint.setColor(0xFF6D4C41);
@@ -364,27 +442,65 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /**
-     * Precomputes park scenery gradients and rolling hill paths for smooth 60fps rendering.
+     * Precomputes park scenery gradients, winding paths, and rolling hill paths for smooth 60fps rendering.
      */
     private void setupParkScenery(int w, int h) {
+        float u = w / 400f;
         float binTopY = h * 0.70f;
         if (engine != null && !engine.getBins().isEmpty()) {
             binTopY = engine.getBins().get(0).getBounds().top;
         }
-        float promenadeY = binTopY - 28f;
+        float promenadeY = binTopY - 10f * u;
 
-        // Vibrant sunny sky gradient
+        // Decode and pre-scale the HD illustrated park backdrop once for zero-allocation 60fps drawing
+        try {
+            if (rawParkBackdropBitmap == null) {
+                rawParkBackdropBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_park_scenery_hd);
+            }
+            if (rawParkBackdropBitmap != null && w > 0 && promenadeY > 0) {
+                int targetH = Math.max(1, (int) promenadeY);
+                scaledParkBackdropBitmap = Bitmap.createScaledBitmap(rawParkBackdropBitmap, w, targetH, true);
+            }
+        } catch (Exception ignored) {
+        }
+
+        // Vibrant sunny sky gradient with warm horizon glow
         skyPaint.setShader(new LinearGradient(
-                0, 0, 0, promenadeY,
-                new int[]{0xFF38B6FF, 0xFF81D4FA, 0xFFE0F7FA},
-                new float[]{0.0f, 0.50f, 1.0f},
+                0, 0, 0, promenadeY * 0.72f,
+                new int[]{0xFF1E88E5, 0xFF4FC3F7, 0xFFB3E5FC, 0xFFFFFDE7},
+                new float[]{0.0f, 0.42f, 0.82f, 1.0f},
                 Shader.TileMode.CLAMP));
+
+        // Shaded gradient for distant hills
+        distantHillPaint.setShader(new LinearGradient(
+                0, promenadeY * 0.44f, 0, promenadeY * 0.80f,
+                0xFFA5D6A7, 0xFF66BB6A, Shader.TileMode.CLAMP));
+
+        // Shaded gradient for midground hills
+        midHillPaint.setShader(new LinearGradient(
+                0, promenadeY * 0.58f, 0, promenadeY * 0.92f,
+                0xFF81C784, 0xFF388E3C, Shader.TileMode.CLAMP));
+
+        // Shaded gradient for foreground park meadow
+        parkLawnPaint.setShader(new LinearGradient(
+                0, promenadeY * 0.78f, 0, promenadeY,
+                0xFF66BB6A, 0xFF2E7D32, Shader.TileMode.CLAMP));
+
+        // Sparkling turquoise pond gradient
+        pondWaterPaint.setShader(new LinearGradient(
+                w * 0.50f, promenadeY * 0.78f, w * 0.82f, promenadeY * 0.90f,
+                0xFF4FC3F7, 0xFF0288D1, Shader.TileMode.CLAMP));
+
+        // Textured promenade sidewalk gradient
+        sidewalkPaint.setShader(new LinearGradient(
+                0, promenadeY, 0, h,
+                0xFFF5F7F8, 0xFFCFD8DC, Shader.TileMode.CLAMP));
 
         // 1. Distant rolling hill path
         distantHillPath.reset();
         distantHillPath.moveTo(0, promenadeY * 0.62f);
-        distantHillPath.quadTo(w * 0.32f, promenadeY * 0.44f, w * 0.62f, promenadeY * 0.58f);
-        distantHillPath.quadTo(w * 0.82f, promenadeY * 0.50f, w, promenadeY * 0.62f);
+        distantHillPath.quadTo(w * 0.30f, promenadeY * 0.46f, w * 0.60f, promenadeY * 0.58f);
+        distantHillPath.quadTo(w * 0.82f, promenadeY * 0.50f, w, promenadeY * 0.60f);
         distantHillPath.lineTo(w, promenadeY);
         distantHillPath.lineTo(0, promenadeY);
         distantHillPath.close();
@@ -392,19 +508,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // 2. Midground rolling hill path
         midHillPath.reset();
         midHillPath.moveTo(0, promenadeY * 0.74f);
-        midHillPath.quadTo(w * 0.40f, promenadeY * 0.58f, w * 0.75f, promenadeY * 0.72f);
-        midHillPath.quadTo(w * 0.90f, promenadeY * 0.66f, w, promenadeY * 0.72f);
+        midHillPath.quadTo(w * 0.38f, promenadeY * 0.60f, w * 0.72f, promenadeY * 0.72f);
+        midHillPath.quadTo(w * 0.88f, promenadeY * 0.66f, w, promenadeY * 0.73f);
         midHillPath.lineTo(w, promenadeY);
         midHillPath.lineTo(0, promenadeY);
         midHillPath.close();
 
         // 3. Foreground lush park lawn path
         lawnPath.reset();
-        lawnPath.moveTo(0, promenadeY * 0.86f);
-        lawnPath.quadTo(w * 0.50f, promenadeY * 0.80f, w, promenadeY * 0.85f);
+        lawnPath.moveTo(0, promenadeY * 0.85f);
+        lawnPath.quadTo(w * 0.48f, promenadeY * 0.78f, w, promenadeY * 0.84f);
         lawnPath.lineTo(w, promenadeY);
         lawnPath.lineTo(0, promenadeY);
         lawnPath.close();
+
+        // 4. Winding perspective stone pathway from midground hill down to promenade
+        windingStonePath.reset();
+        windingStonePath.moveTo(w * 0.36f, promenadeY * 0.66f);
+        windingStonePath.quadTo(w * 0.24f, promenadeY * 0.78f, w * 0.40f, promenadeY);
+        windingStonePath.lineTo(w * 0.54f, promenadeY);
+        windingStonePath.quadTo(w * 0.33f, promenadeY * 0.78f, w * 0.41f, promenadeY * 0.66f);
+        windingStonePath.close();
     }
 
     /**
@@ -540,228 +664,458 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /**
-     * Renders a cheerful cartoon park landscape: sunny gradient sky, warm sun, drifting clouds,
-     * distant rolling hills, lush green park lawn, rustic wooden fence, and flanking trees.
+     * Renders a rich, multi-layered cartoon park landscape:
+     * Uses the high-definition illustrated park backdrop (lush detailed oak trees, sunbeams, eco-skyline,
+     * wind turbines, tiered stone pond fountain, cobblestone path, benches, streetlamps, and flowerbed fence)
+     * augmented with live 60fps animated fountain water spray, pond ripples, lantern glows, and stonework promenade.
      */
     private void drawParkLandscape(Canvas canvas) {
         int w = getWidth();
         int h = getHeight();
         if (w <= 0 || h <= 0) return;
 
+        // Density-independent proportional unit based on screen width
+        float u = w / 400f;
+
         float binTopY = h * 0.70f;
         if (engine != null && !engine.getBins().isEmpty()) {
             binTopY = engine.getBins().get(0).getBounds().top;
         }
-        float promenadeY = binTopY - 28f;
+        float promenadeY = binTopY - 10f * u;
 
-        // 1. Sunny Sky Gradient
-        canvas.drawRect(0, 0, w, promenadeY, skyPaint);
+        if (scaledParkBackdropBitmap != null) {
+            // 1. Render the richly illustrated HD Park Scenery Backdrop
+            canvas.drawBitmap(scaledParkBackdropBitmap, 0, 0, null);
 
-        // 2. Warm Cartoon Sun with glowing rings (top-right)
-        float sunX = w * 0.85f;
-        float sunY = h * 0.12f;
-        sunGlowPaint.setColor(0x22FFF59D);
-        canvas.drawCircle(sunX, sunY, 70f, sunGlowPaint);
-        sunGlowPaint.setColor(0x44FFEE58);
-        canvas.drawCircle(sunX, sunY, 48f, sunGlowPaint);
-        sunCorePaint.setColor(0xFFFFF9C4);
-        canvas.drawCircle(sunX, sunY, 30f, sunCorePaint);
+            // 2. Live Animated Concentric Water Ripples & Sparkling Spray on the Pond Fountain
+            float fCx = w * 0.238f;
+            float fCy = promenadeY * 0.722f;
+            float ripplePhase = (treeSwayTimer * 0.55f) % 1.0f;
+            int rAlpha = (int) ((1.0f - ripplePhase) * 145);
+            pondRipplePaint.setStrokeWidth(1.5f * u);
+            pondRipplePaint.setColor((rAlpha << 24) | 0xE1F5FE);
+            float ripRx = (36f + ripplePhase * 54f) * u;
+            float ripRy = (11f + ripplePhase * 18f) * u;
+            canvas.drawOval(fCx - ripRx, fCy - ripRy, fCx + ripRx, fCy + ripRy, pondRipplePaint);
 
-        // 3. Fluffy Cartoon Clouds gently drifting
-        float cloud1X = ((w * 0.15f + cloudDrift) % (w + 220f)) - 110f;
-        drawCartoonCloud(canvas, cloud1X, h * 0.16f, 0.95f);
+            // Animated fountain top water arcs
+            fountainSprayPaint.setStrokeWidth(1.8f * u);
+            float sprayBounce = (float) Math.sin(treeSwayTimer * 4.5f) * (2.0f * u);
+            float spoutY = promenadeY * 0.632f;
+            for (int side = -1; side <= 1; side += 2) {
+                scratchPath.reset();
+                scratchPath.moveTo(fCx, spoutY);
+                scratchPath.quadTo(fCx + side * 9f * u, spoutY - 8f * u + sprayBounce, fCx + side * 15f * u, spoutY + 18f * u);
+                canvas.drawPath(scratchPath, fountainSprayPaint);
+            }
 
-        float cloud2X = ((w * 0.58f + cloudDrift * 0.65f) % (w + 240f)) - 120f;
-        drawCartoonCloud(canvas, cloud2X, h * 0.10f, 0.72f);
-
-        float cloud3X = ((w * 0.82f + cloudDrift * 1.15f) % (w + 200f)) - 100f;
-        drawCartoonCloud(canvas, cloud3X, h * 0.22f, 0.60f);
-
-        // 4. Distant Rolling Hills
-        canvas.drawPath(distantHillPath, distantHillPaint);
-
-        // 5. Midground Rolling Hill
-        canvas.drawPath(midHillPath, midHillPaint);
-
-        // 6. Foreground Lush Green Park Meadow
-        canvas.drawPath(lawnPath, parkLawnPaint);
-
-        // 7. Rustic Wooden Split-Rail Park Fence along lawn border
-        float fenceY = promenadeY - 26f;
-        fenceRailPaint.setStrokeWidth(6f);
-        canvas.drawLine(0, fenceY, w, fenceY, fenceRailPaint);
-        canvas.drawLine(0, fenceY + 14f, w, fenceY + 14f, fenceRailPaint);
-
-        // Fence posts across the screen
-        int postCount = 7;
-        float postSpacing = w / (float) (postCount + 1);
-        for (int i = 1; i <= postCount; i++) {
-            float px = i * postSpacing;
-            // Wooden post
-            canvas.drawRect(px - 7f, fenceY - 12f, px + 7f, fenceY + 30f, fencePostPaint);
-            // Beveled post cap
-            Path cap = new Path();
-            cap.moveTo(px - 8f, fenceY - 12f);
-            cap.lineTo(px, fenceY - 20f);
-            cap.lineTo(px + 8f, fenceY - 12f);
-            cap.close();
-            canvas.drawPath(cap, fencePostPaint);
+            // 3. Subtle Warm Pulsing Glow on the 3 Vintage Streetlamp Lanterns
+            float glowPulse = 1.0f + 0.14f * (float) Math.sin(treeSwayTimer * 3.0f);
+            lampGlowPaint.setColor(0x38FFF59D);
+            canvas.drawCircle(w * 0.635f, promenadeY * 0.596f, 10f * u * glowPulse, lampGlowPaint);
+            canvas.drawCircle(w * 0.774f, promenadeY * 0.594f, 12f * u * glowPulse, lampGlowPaint);
+            canvas.drawCircle(w * 0.902f, promenadeY * 0.608f, 16f * u * glowPulse, lampGlowPaint);
+        } else {
+            // Fallback procedural park drawing if bitmap resource is unavailable in headless unit tests
+            canvas.drawRect(0, 0, w, promenadeY, skyPaint);
+            float sunX = w * 0.84f;
+            float sunY = promenadeY * 0.17f;
+            drawSunbeams(canvas, sunX, sunY, w, promenadeY);
+            sunGlowPaint.setColor(0x28FFF59D);
+            canvas.drawCircle(sunX, sunY, 58f * u, sunGlowPaint);
+            sunGlowPaint.setColor(0x48FFEE58);
+            canvas.drawCircle(sunX, sunY, 40f * u, sunGlowPaint);
+            sunCorePaint.setColor(0xFFFFF9C4);
+            canvas.drawCircle(sunX, sunY, 24f * u, sunCorePaint);
+            drawEcoSkyline(canvas, w, promenadeY, u);
+            canvas.drawPath(distantHillPath, distantHillPaint);
+            drawDistantTreeline(canvas, w, promenadeY, u);
+            canvas.drawPath(midHillPath, midHillPaint);
+            canvas.drawPath(lawnPath, parkLawnPaint);
+            drawWindingStonePath(canvas, w, promenadeY, u);
+            drawPondAndFountain(canvas, w * 0.70f, promenadeY * 0.86f, w * 0.18f, promenadeY * 0.062f, u);
+            drawParkBench(canvas, w * 0.24f, promenadeY * 0.88f, 0.85f * u);
+            drawParkBench(canvas, w * 0.54f, promenadeY * 0.78f, 0.62f * u);
         }
 
-        // 8. Flowering Park Bushes along the fence line
-        int bushCount = 10;
-        float bushSpacing = w / (float) bushCount;
-        int[] flowerColors = {0xFFFFEB3B, 0xFFFFFFFF, 0xFFF48FB1, 0xFFFFEB3B, 0xFFBA68C8};
-        for (int i = 0; i < bushCount; i++) {
-            float bx = i * bushSpacing + bushSpacing * 0.5f;
-            float by = promenadeY - 6f;
-            // Leafy bush mound
-            treeFoliageDarkPaint.setColor(0xFF2E7D32);
-            canvas.drawCircle(bx, by, 18f, treeFoliageDarkPaint);
-            treeFoliageLightPaint.setColor(0xFF43A047);
-            canvas.drawCircle(bx + 4f, by - 4f, 13f, treeFoliageLightPaint);
-
-            // Blossom dots
-            flowerDotPaint.setColor(flowerColors[i % flowerColors.length]);
-            canvas.drawCircle(bx - 5f, by - 6f, 3.5f, flowerDotPaint);
-            canvas.drawCircle(bx + 7f, by - 3f, 3.5f, flowerDotPaint);
-            flowerDotPaint.setColor(0xFFFF9800);
-            canvas.drawCircle(bx - 5f, by - 6f, 1.5f, flowerDotPaint);
-            canvas.drawCircle(bx + 7f, by - 3f, 1.5f, flowerDotPaint);
-        }
-
-        // 9. Framing Park Trees (Lush cartoon trees on screen borders)
-        // 9. Framing Park Trees (Lush volumetric cartoon trees with organic curves and subtle wind sway)
-        float currentWind = (engine != null) ? engine.getEnvironmentManager().getCurrentWindForce() : 0f;
-        float swayPx = (float) Math.sin(treeSwayTimer) * (w * 0.005f) + (currentWind / 150f) * (w * 0.012f);
-
-        // Ground shadow beneath Left Tree
-        canvas.drawOval(-w * 0.04f, promenadeY - 8f, w * 0.16f, promenadeY + 12f, treeShadowPaint);
-
-        // Left Trunk: Smooth curved woody trunk branching gracefully
-        Path leftTrunk = new Path();
-        leftTrunk.moveTo(-w * 0.04f, promenadeY);
-        leftTrunk.quadTo(w * 0.02f, promenadeY * 0.74f, w * 0.04f + swayPx * 0.2f, promenadeY * 0.52f);
-        // Main rising branch
-        leftTrunk.lineTo(w * 0.07f + swayPx * 0.4f, promenadeY * 0.35f);
-        leftTrunk.lineTo(w * 0.11f + swayPx * 0.4f, promenadeY * 0.37f);
-        leftTrunk.quadTo(w * 0.07f, promenadeY * 0.48f, w * 0.10f + swayPx * 0.3f, promenadeY * 0.53f);
-        // Side branch reaching inward
-        leftTrunk.lineTo(w * 0.16f + swayPx * 0.3f, promenadeY * 0.46f);
-        leftTrunk.lineTo(w * 0.17f + swayPx * 0.3f, promenadeY * 0.49f);
-        leftTrunk.quadTo(w * 0.11f, promenadeY * 0.60f, w * 0.11f, promenadeY);
-        leftTrunk.close();
-
-        // Shaded bark back-edge
-        canvas.drawPath(leftTrunk, treeBarkDarkPaint);
-        // Warm main bark
-        canvas.save();
-        canvas.clipPath(leftTrunk);
-        canvas.drawRect(w * 0.02f, 0, w * 0.30f, promenadeY + 20f, treeTrunkPaint);
-        canvas.restore();
-
-        // Left Canopy: Layered volumetric puff clouds scaled to screen size
-        float lR1 = w * 0.16f;
-        float lR2 = w * 0.13f;
-        float lR3 = w * 0.11f;
-        float lR4 = w * 0.09f;
-
-        float lcx1 = w * 0.03f + swayPx;
-        float lcy1 = promenadeY * 0.44f;
-        float lcx2 = w * 0.10f + swayPx;
-        float lcy2 = promenadeY * 0.48f;
-        float lcx3 = w * 0.06f + swayPx;
-        float lcy3 = promenadeY * 0.34f;
-        float lcx4 = w * 0.13f + swayPx;
-        float lcy4 = promenadeY * 0.38f;
-        float lcx5 = w * 0.05f + swayPx;
-        float lcy5 = promenadeY * 0.26f;
-
-        // 1. Deep ambient shadow puffs (underside)
-        canvas.drawCircle(lcx1, lcy1, lR1, treeFoliageDarkPaint);
-        canvas.drawCircle(lcx2, lcy2, lR2, treeFoliageDarkPaint);
-
-        // 2. Mid forest green body
-        canvas.drawCircle(lcx1 + 6f, lcy1 - 6f, lR1 * 0.90f, treeFoliageMidPaint);
-        canvas.drawCircle(lcx2 + 4f, lcy2 - 6f, lR2 * 0.90f, treeFoliageMidPaint);
-        canvas.drawCircle(lcx3, lcy3, lR1 * 0.95f, treeFoliageMidPaint);
-        canvas.drawCircle(lcx4, lcy4, lR2 * 0.85f, treeFoliageMidPaint);
-
-        // 3. Vibrant sun-facing canopy crown
-        canvas.drawCircle(lcx3 + 8f, lcy3 - 8f, lR1 * 0.78f, treeFoliageLightPaint);
-        canvas.drawCircle(lcx4 + 6f, lcy4 - 6f, lR2 * 0.72f, treeFoliageLightPaint);
-        canvas.drawCircle(lcx5, lcy5, lR3, treeFoliageLightPaint);
-
-        // 4. Bright sunlit crest highlights facing the sun (top-right)
-        canvas.drawCircle(lcx3 + 18f, lcy3 - 18f, lR3 * 0.55f, treeFoliageHighlightPaint);
-        canvas.drawCircle(lcx4 + 14f, lcy4 - 14f, lR4 * 0.50f, treeFoliageHighlightPaint);
-        canvas.drawCircle(lcx5 + 12f, lcy5 - 12f, lR4 * 0.60f, treeFoliageHighlightPaint);
-
-        // Ground shadow beneath Right Tree
-        canvas.drawOval(w * 0.84f, promenadeY - 8f, w * 1.04f, promenadeY + 12f, treeShadowPaint);
-
-        // Right Trunk: Smooth curved woody trunk branching into screen
-        Path rightTrunk = new Path();
-        rightTrunk.moveTo(w * 1.04f, promenadeY);
-        rightTrunk.quadTo(w * 0.98f, promenadeY * 0.74f, w * 0.96f + swayPx * 0.2f, promenadeY * 0.52f);
-        // Main rising branch
-        rightTrunk.lineTo(w * 0.93f + swayPx * 0.4f, promenadeY * 0.35f);
-        rightTrunk.lineTo(w * 0.89f + swayPx * 0.4f, promenadeY * 0.37f);
-        rightTrunk.quadTo(w * 0.93f, promenadeY * 0.48f, w * 0.90f + swayPx * 0.3f, promenadeY * 0.53f);
-        // Side branch reaching inward left
-        rightTrunk.lineTo(w * 0.84f + swayPx * 0.3f, promenadeY * 0.46f);
-        rightTrunk.lineTo(w * 0.83f + swayPx * 0.3f, promenadeY * 0.49f);
-        rightTrunk.quadTo(w * 0.89f, promenadeY * 0.60f, w * 0.89f, promenadeY);
-        rightTrunk.close();
-
-        // Shaded bark back-edge
-        canvas.drawPath(rightTrunk, treeBarkDarkPaint);
-        // Warm main bark
-        canvas.save();
-        canvas.clipPath(rightTrunk);
-        canvas.drawRect(w * 0.70f, 0, w * 0.98f, promenadeY + 20f, treeTrunkPaint);
-        canvas.restore();
-
-        // Right Canopy: Layered volumetric puff clouds
-        float rcx1 = w * 0.97f + swayPx;
-        float rcy1 = promenadeY * 0.44f;
-        float rcx2 = w * 0.90f + swayPx;
-        float rcy2 = promenadeY * 0.48f;
-        float rcx3 = w * 0.94f + swayPx;
-        float rcy3 = promenadeY * 0.34f;
-        float rcx4 = w * 0.87f + swayPx;
-        float rcy4 = promenadeY * 0.38f;
-        float rcx5 = w * 0.95f + swayPx;
-        float rcy5 = promenadeY * 0.26f;
-
-        // 1. Deep ambient shadow puffs (underside)
-        canvas.drawCircle(rcx1, rcy1, lR1, treeFoliageDarkPaint);
-        canvas.drawCircle(rcx2, rcy2, lR2, treeFoliageDarkPaint);
-
-        // 2. Mid forest green body
-        canvas.drawCircle(rcx1 + 6f, rcy1 - 6f, lR1 * 0.90f, treeFoliageMidPaint);
-        canvas.drawCircle(rcx2 + 4f, rcy2 - 6f, lR2 * 0.90f, treeFoliageMidPaint);
-        canvas.drawCircle(rcx3, rcy3, lR1 * 0.95f, treeFoliageMidPaint);
-        canvas.drawCircle(rcx4, rcy4, lR2 * 0.85f, treeFoliageMidPaint);
-
-        // 3. Vibrant sun-facing canopy crown
-        canvas.drawCircle(rcx3 + 8f, rcy3 - 8f, lR1 * 0.78f, treeFoliageLightPaint);
-        canvas.drawCircle(rcx4 + 6f, rcy4 - 6f, lR2 * 0.72f, treeFoliageLightPaint);
-        canvas.drawCircle(rcx5, rcy5, lR3, treeFoliageLightPaint);
-
-        // 4. Bright sunlit crest highlights facing the sun (top-right)
-        canvas.drawCircle(rcx3 + 18f, rcy3 - 18f, lR3 * 0.55f, treeFoliageHighlightPaint);
-        canvas.drawCircle(rcx4 + 14f, rcy4 - 14f, lR4 * 0.50f, treeFoliageHighlightPaint);
-        canvas.drawCircle(rcx5 + 12f, rcy5 - 12f, lR4 * 0.60f, treeFoliageHighlightPaint);
-
-        // 10. Park Sidewalk Promenade Pavement from promenadeY down to bottom
+        // Textured Stonework Promenade Pavement from promenadeY down to bottom
         canvas.drawRect(0, promenadeY, w, h, sidewalkPaint);
-        // Flagstone expansion joints
-        for (int i = 1; i <= 3; i++) {
-            float sx = w * (i / 4f);
-            canvas.drawLine(sx, promenadeY, sx, h, sidewalkPavingPaint);
+        float course1Y = promenadeY + 14f * u;
+        float course2Y = promenadeY + 28f * u;
+        sidewalkPavingPaint.setStrokeWidth(1.2f * u);
+        canvas.drawLine(0, course1Y, w, course1Y, sidewalkPavingPaint);
+        canvas.drawLine(0, course2Y, w, course2Y, sidewalkPavingPaint);
+        for (int i = 1; i <= 5; i++) {
+            float sx = w * (i / 6f);
+            canvas.drawLine(sx, promenadeY, sx, course1Y, sidewalkPavingPaint);
+            float sxShifted = sx - (w / 12f);
+            canvas.drawLine(sxShifted, course1Y, sxShifted, course2Y, sidewalkPavingPaint);
+            canvas.drawLine(sx, course2Y, sx, h, sidewalkPavingPaint);
         }
-        canvas.drawLine(0, promenadeY + 50f, w, promenadeY + 50f, sidewalkPavingPaint);
+        stoneSlabPaint.setColor(0x55FFFFFF);
+        canvas.drawRoundRect(w * 0.05f, promenadeY + 2.5f * u, w * 0.14f, course1Y - 2.5f * u, 3f * u, 3f * u, stoneSlabPaint);
+        canvas.drawRoundRect(w * 0.36f, promenadeY + 2.5f * u, w * 0.47f, course1Y - 2.5f * u, 3f * u, 3f * u, stoneSlabPaint);
+        canvas.drawRoundRect(w * 0.70f, promenadeY + 2.5f * u, w * 0.80f, course1Y - 2.5f * u, 3f * u, 3f * u, stoneSlabPaint);
+        stoneSlabPaint.setColor(0xFFEFEBE9);
+    }
+
+    /**
+     * Draws a lush, natural spreading park tree on either the left or right border.
+     */
+    private void drawFramingParkTree(Canvas canvas, int w, float promenadeY, float swayPx, boolean isLeft) {
+        float dir = isLeft ? 1f : -1f;
+        float baseX = isLeft ? 0f : w;
+
+        // Ground shadow
+        float shLeft = isLeft ? -w * 0.05f : w * 0.82f;
+        float shRight = isLeft ? w * 0.18f : w * 1.05f;
+        canvas.drawOval(shLeft, promenadeY - 6f, shRight, promenadeY + 10f, treeShadowPaint);
+
+        // Organic curved trunk with flared roots and two spreading boughs
+        scratchPath.reset();
+        scratchPath.moveTo(baseX - dir * w * 0.04f, promenadeY);
+        scratchPath.quadTo(baseX + dir * w * 0.02f, promenadeY * 0.80f, baseX + dir * w * 0.03f + swayPx * 0.25f, promenadeY * 0.58f);
+        scratchPath.lineTo(baseX + dir * w * 0.06f + swayPx * 0.4f, promenadeY * 0.47f);
+        scratchPath.lineTo(baseX + dir * w * 0.09f + swayPx * 0.4f, promenadeY * 0.49f);
+        scratchPath.quadTo(baseX + dir * w * 0.06f, promenadeY * 0.56f, baseX + dir * w * 0.09f + swayPx * 0.35f, promenadeY * 0.59f);
+        scratchPath.lineTo(baseX + dir * w * 0.15f + swayPx * 0.35f, promenadeY * 0.53f);
+        scratchPath.lineTo(baseX + dir * w * 0.16f + swayPx * 0.35f, promenadeY * 0.56f);
+        scratchPath.quadTo(baseX + dir * w * 0.09f, promenadeY * 0.66f, baseX + dir * w * 0.11f, promenadeY);
+        scratchPath.close();
+
+        canvas.drawPath(scratchPath, treeBarkDarkPaint);
+        canvas.save();
+        canvas.clipPath(scratchPath);
+        if (isLeft) {
+            canvas.drawRect(w * 0.015f, 0, w * 0.25f, promenadeY + 10f, treeTrunkPaint);
+        } else {
+            canvas.drawRect(w * 0.75f, 0, w * 0.985f, promenadeY + 10f, treeTrunkPaint);
+        }
+        canvas.restore();
+
+        // Wide, rounded spreading canopy cluster (compact vertically around 0.40f..0.55f)
+        float rMain = w * 0.135f;
+        float rSide = w * 0.110f;
+        float rTop = w * 0.105f;
+        float rHlt = w * 0.065f;
+
+        float c1x = baseX + dir * (w * 0.03f) + swayPx;
+        float c1y = promenadeY * 0.53f;
+        float c2x = baseX + dir * (w * 0.13f) + swayPx;
+        float c2y = promenadeY * 0.55f;
+        float c3x = baseX + dir * (w * 0.08f) + swayPx;
+        float c3y = promenadeY * 0.45f;
+        float c4x = baseX + dir * (w * 0.16f) + swayPx;
+        float c4y = promenadeY * 0.48f;
+        float c5x = baseX + dir * (w * 0.04f) + swayPx;
+        float c5y = promenadeY * 0.38f;
+
+        // 1. Deep shadow underside
+        canvas.drawCircle(c1x, c1y, rMain, treeFoliageDarkPaint);
+        canvas.drawCircle(c2x, c2y, rSide, treeFoliageDarkPaint);
+
+        // 2. Mid forest green fullness
+        canvas.drawCircle(c1x + 5f, c1y - 6f, rMain * 0.92f, treeFoliageMidPaint);
+        canvas.drawCircle(c2x + 4f, c2y - 6f, rSide * 0.90f, treeFoliageMidPaint);
+        canvas.drawCircle(c3x, c3y, rMain * 0.94f, treeFoliageMidPaint);
+        canvas.drawCircle(c4x, c4y, rSide * 0.85f, treeFoliageMidPaint);
+
+        // 3. Sunlit upper crown
+        canvas.drawCircle(c3x + 6f, c3y - 8f, rMain * 0.78f, treeFoliageLightPaint);
+        canvas.drawCircle(c4x + 5f, c4y - 6f, rSide * 0.72f, treeFoliageLightPaint);
+        canvas.drawCircle(c5x, c5y, rTop, treeFoliageLightPaint);
+
+        // 4. Specular leaf highlights facing the sun
+        canvas.drawCircle(c3x + 14f, c3y - 14f, rHlt, treeFoliageHighlightPaint);
+        canvas.drawCircle(c4x + 10f, c4y - 10f, rHlt * 0.80f, treeFoliageHighlightPaint);
+        canvas.drawCircle(c5x + 10f, c5y - 10f, rHlt * 0.85f, treeFoliageHighlightPaint);
+    }
+
+    /**
+     * Draws warm diagonal volumetric light rays radiating from the sun across the park.
+     */
+    private void drawSunbeams(Canvas canvas, float sunX, float sunY, int w, float promenadeY) {
+        float[][] rays = {
+            {-0.55f, -0.35f},
+            {-0.28f, -0.10f},
+            {-0.02f, 0.14f}
+        };
+        for (float[] r : rays) {
+            sunbeamPath.reset();
+            sunbeamPath.moveTo(sunX, sunY);
+            sunbeamPath.lineTo(sunX + w * r[0], promenadeY);
+            sunbeamPath.lineTo(sunX + w * r[1], promenadeY);
+            sunbeamPath.close();
+            canvas.drawPath(sunbeamPath, sunbeamPaint);
+        }
+    }
+
+    /**
+     * Draws a soft atmospheric eco-city skyline silhouette and rotating wind turbines on the far horizon.
+     */
+    private void drawEcoSkyline(Canvas canvas, int w, float promenadeY, float u) {
+        float baseY = promenadeY * 0.60f;
+
+        float[][] farBuildings = {
+            {0.12f, 0.19f, 0.43f},
+            {0.21f, 0.28f, 0.39f},
+            {0.29f, 0.35f, 0.45f},
+            {0.52f, 0.59f, 0.41f},
+            {0.61f, 0.68f, 0.36f},
+            {0.70f, 0.77f, 0.43f}
+        };
+        for (float[] b : farBuildings) {
+            canvas.drawRect(w * b[0], promenadeY * b[2], w * b[1], baseY, skylineFarPaint);
+        }
+
+        float[][] midBuildings = {
+            {0.16f, 0.23f, 0.41f},
+            {0.25f, 0.31f, 0.44f},
+            {0.56f, 0.63f, 0.39f},
+            {0.66f, 0.73f, 0.42f}
+        };
+        for (float[] b : midBuildings) {
+            float left = w * b[0];
+            float right = w * b[1];
+            float top = promenadeY * b[2];
+            canvas.drawRect(left, top, right, baseY, skylineMidPaint);
+            canvas.drawOval(left, top - 4f * u, right, top + 4f * u, skylineMidPaint);
+            float winW = (right - left) * 0.22f;
+            for (float wy = top + 5f * u; wy < baseY - 15f * u; wy += 7f * u) {
+                canvas.drawRect(left + winW, wy, left + winW * 2f, wy + 3.5f * u, skylineWindowPaint);
+                canvas.drawRect(right - winW * 2f, wy, right - winW, wy + 3.5f * u, skylineWindowPaint);
+            }
+        }
+
+        // Eco Wind Turbines on the distant hill crest
+        drawWindTurbine(canvas, w * 0.39f, promenadeY * 0.47f, 26f * u, treeSwayTimer * 45f, u);
+        drawWindTurbine(canvas, w * 0.46f, promenadeY * 0.49f, 22f * u, treeSwayTimer * 45f + 60f, u);
+    }
+
+    /**
+     * Draws a clean white wind turbine with 3 rotating blades on the horizon.
+     */
+    private void drawWindTurbine(Canvas canvas, float x, float hubY, float height, float angleDeg, float u) {
+        pondRimPaint.setColor(0xFFE1F5FE);
+        pondRimPaint.setStrokeWidth(2.2f * u);
+        canvas.drawLine(x, hubY, x, hubY + height, pondRimPaint);
+        canvas.save();
+        canvas.translate(x, hubY);
+        canvas.rotate(angleDeg);
+        float bladeLen = height * 0.55f;
+        for (int i = 0; i < 3; i++) {
+            canvas.drawLine(0, 0, 0, -bladeLen, pondRimPaint);
+            canvas.rotate(120f);
+        }
+        canvas.drawCircle(0, 0, 2.5f * u, cloudPaint);
+        canvas.restore();
+    }
+
+    /**
+     * Draws soft atmospheric tree silhouettes tucked behind the midground hill crest.
+     */
+    private void drawDistantTreeline(Canvas canvas, int w, float promenadeY, float u) {
+        float[] treeX = {0.18f, 0.23f, 0.29f, 0.35f, 0.48f, 0.54f, 0.62f, 0.74f, 0.80f};
+        float[] treeY = {0.67f, 0.65f, 0.64f, 0.65f, 0.66f, 0.67f, 0.69f, 0.69f, 0.68f};
+        float[] treeR = {15f, 19f, 21f, 17f, 18f, 15f, 20f, 17f, 19f};
+
+        for (int i = 0; i < treeX.length; i++) {
+            float tx = w * treeX[i];
+            float ty = promenadeY * treeY[i];
+            float r = treeR[i] * u;
+            treeFoliageLightPaint.setColor(0xFF55A859);
+            canvas.drawCircle(tx, ty, r, treeFoliageLightPaint);
+            treeFoliageHighlightPaint.setColor(0xFF76C27A);
+            canvas.drawCircle(tx + 2.5f * u, ty - 2.5f * u, r * 0.74f, treeFoliageHighlightPaint);
+        }
+        treeFoliageLightPaint.setColor(0xFF43A047);
+        treeFoliageHighlightPaint.setColor(0xFF81C784);
+    }
+
+    /**
+     * Draws the winding stone pathway with individual stepping stones across the park meadow.
+     */
+    private void drawWindingStonePath(Canvas canvas, int w, float promenadeY, float u) {
+        canvas.drawPath(windingStonePath, stonePathPaint);
+
+        float[][] stones = {
+            {0.38f, 0.69f, 9f, 3.2f},
+            {0.36f, 0.73f, 11f, 3.8f},
+            {0.35f, 0.78f, 13.5f, 4.5f},
+            {0.36f, 0.83f, 16.5f, 5.5f},
+            {0.39f, 0.89f, 20f, 6.5f},
+            {0.44f, 0.95f, 24f, 7.5f}
+        };
+        for (float[] s : stones) {
+            float sx = w * s[0];
+            float sy = promenadeY * s[1];
+            float rx = s[2] * u;
+            float ry = s[3] * u;
+            stoneSlabPaint.setColor(0xFFBCAAA4);
+            canvas.drawOval(sx - rx, sy - ry + 1.5f * u, sx + rx, sy + ry + 1.5f * u, stoneSlabPaint);
+            stoneSlabPaint.setColor(0xFFEFEBE9);
+            canvas.drawOval(sx - rx, sy - ry, sx + rx, sy + ry, stoneSlabPaint);
+        }
+    }
+
+    /**
+     * Draws a sparkling park pond with stone rim, lily pads, and an animated tiered fountain.
+     */
+    private void drawPondAndFountain(Canvas canvas, float cx, float cy, float rx, float ry, float u) {
+        // Stone border rim around pond
+        pondRimPaint.setColor(0xFFB0BEC5);
+        canvas.drawOval(cx - rx - 5f * u, cy - ry - 3f * u, cx + rx + 5f * u, cy + ry + 4f * u, pondRimPaint);
+        pondRimPaint.setColor(0xFFCFD8DC);
+        canvas.drawOval(cx - rx - 3f * u, cy - ry - 2f * u, cx + rx + 3f * u, cy + ry + 2f * u, pondRimPaint);
+
+        // Sparkling turquoise water surface
+        canvas.drawOval(cx - rx, cy - ry, cx + rx, cy + ry, pondWaterPaint);
+
+        // Animated concentric water ripples around fountain
+        float ripplePhase = (treeSwayTimer * 0.6f) % 1.0f;
+        int rAlpha = (int) ((1.0f - ripplePhase) * 160);
+        pondRipplePaint.setStrokeWidth(1.5f * u);
+        pondRipplePaint.setColor((rAlpha << 24) | 0xE1F5FE);
+        float ripRx = rx * (0.25f + ripplePhase * 0.60f);
+        float ripRy = ry * (0.25f + ripplePhase * 0.60f);
+        canvas.drawOval(cx - ripRx, cy - ripRy, cx + ripRx, cy + ripRy, pondRipplePaint);
+
+        // Lily pads & pink water lily blossom
+        treeFoliageLightPaint.setColor(0xFF66BB6A);
+        canvas.drawOval(cx - rx * 0.68f, cy + ry * 0.10f, cx - rx * 0.42f, cy + ry * 0.45f, treeFoliageLightPaint);
+        canvas.drawOval(cx + rx * 0.40f, cy + ry * 0.20f, cx + rx * 0.64f, cy + ry * 0.52f, treeFoliageLightPaint);
+        flowerDotPaint.setColor(0xFFF48FB1);
+        canvas.drawCircle(cx - rx * 0.55f, cy + ry * 0.24f, 3f * u, flowerDotPaint);
+        treeFoliageLightPaint.setColor(0xFF43A047);
+
+        // Tiered Stone Fountain in pond center (scaled by u)
+        fountainStonePaint.setColor(0xFFCFD8DC);
+        canvas.drawOval(cx - 16f * u, cy - 4.5f * u, cx + 16f * u, cy + 5f * u, fountainStonePaint);
+        fountainStonePaint.setColor(0xFFECEFF1);
+        canvas.drawRect(cx - 4.5f * u, cy - 16f * u, cx + 4.5f * u, cy + 1.5f * u, fountainStonePaint);
+        canvas.drawOval(cx - 12f * u, cy - 18f * u, cx + 12f * u, cy - 12f * u, fountainStonePaint);
+        canvas.drawRect(cx - 2.5f * u, cy - 25f * u, cx + 2.5f * u, cy - 15f * u, fountainStonePaint);
+
+        // Animated sparkling fountain water arcs
+        fountainSprayPaint.setStrokeWidth(2.0f * u);
+        float sprayBounce = (float) Math.sin(treeSwayTimer * 4f) * (2.2f * u);
+        float topY = cy - 25f * u;
+        for (int side = -1; side <= 1; side += 2) {
+            scratchPath.reset();
+            scratchPath.moveTo(cx, topY);
+            scratchPath.quadTo(cx + side * 11f * u, topY - 12f * u + sprayBounce, cx + side * 17f * u, cy - 1.5f * u);
+            canvas.drawPath(scratchPath, fountainSprayPaint);
+
+            scratchPath.reset();
+            scratchPath.moveTo(cx, topY);
+            scratchPath.quadTo(cx + side * 6f * u, topY - 16f * u - sprayBounce, cx + side * 10f * u, cy - 14f * u);
+            canvas.drawPath(scratchPath, fountainSprayPaint);
+        }
+    }
+
+    /**
+     * Draws a classic wooden park bench with wrought-iron legs and armrests.
+     */
+    private void drawParkBench(Canvas canvas, float cx, float cy, float scale) {
+        canvas.save();
+        canvas.translate(cx, cy);
+        canvas.scale(scale, scale);
+
+        // Ground shadow
+        canvas.drawOval(-38f, 10f, 38f, 18f, treeShadowPaint);
+
+        // Wrought-iron legs
+        ironWorkPaint.setStrokeWidth(3.2f);
+        canvas.drawLine(-28f, -14f, -28f, 15f, ironWorkPaint);
+        canvas.drawLine(28f, -14f, 28f, 15f, ironWorkPaint);
+        canvas.drawLine(-22f, -10f, -22f, 13f, ironWorkPaint);
+        canvas.drawLine(22f, -10f, 22f, 13f, ironWorkPaint);
+
+        // Wooden backrest slats
+        canvas.drawRoundRect(-34f, -16f, 34f, -10f, 2f, 2f, benchWoodLightPaint);
+        canvas.drawRoundRect(-34f, -8f, 34f, -2f, 2f, 2f, benchWoodPaint);
+
+        // Wooden seat plank
+        canvas.drawRoundRect(-36f, 1f, 36f, 7f, 3f, 3f, benchWoodLightPaint);
+
+        // Wrought-iron curved armrests
+        ironWorkPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawArc(-35f, -8f, -23f, 6f, 180f, 180f, false, ironWorkPaint);
+        canvas.drawArc(23f, -8f, 35f, 6f, 180f, 180f, false, ironWorkPaint);
+        ironWorkPaint.setStyle(Paint.Style.FILL);
+
+        canvas.restore();
+    }
+
+    /**
+     * Draws a vintage wrought-iron park streetlamp with warm glowing lantern glass.
+     */
+    private void drawVintageStreetlamp(Canvas canvas, float x, float baseY, float scale) {
+        canvas.save();
+        canvas.translate(x, baseY);
+        canvas.scale(scale, scale);
+
+        float poleHeight = 95f;
+        float topY = -poleHeight;
+
+        // Warm daytime lantern aura
+        canvas.drawCircle(0, topY - 9f, 24f, lampGlowPaint);
+
+        // Cast-iron molded base & tapered post
+        canvas.drawRoundRect(-7f, -9f, 7f, 0f, 3f, 3f, ironWorkPaint);
+        canvas.drawRect(-4.5f, -22f, 4.5f, -9f, ironWorkPaint);
+        canvas.drawRect(-2.5f, topY, 2.5f, -22f, ironWorkPaint);
+
+        // Decorative crossbar Ladder Rest
+        ironWorkPaint.setStrokeWidth(2.8f);
+        canvas.drawLine(-10f, topY + 15f, 10f, topY + 15f, ironWorkPaint);
+        canvas.drawCircle(-10f, topY + 15f, 2.2f, ironWorkPaint);
+        canvas.drawCircle(10f, topY + 15f, 2.2f, ironWorkPaint);
+
+        // Lantern glass housing (trapezoid)
+        scratchPath.reset();
+        scratchPath.moveTo(-5.5f, topY);
+        scratchPath.lineTo(-9f, topY - 16f);
+        scratchPath.lineTo(9f, topY - 16f);
+        scratchPath.lineTo(5.5f, topY);
+        scratchPath.close();
+        canvas.drawPath(scratchPath, lampGlassPaint);
+
+        ironWorkPaint.setStyle(Paint.Style.STROKE);
+        ironWorkPaint.setStrokeWidth(2.0f);
+        canvas.drawPath(scratchPath, ironWorkPaint);
+        ironWorkPaint.setStyle(Paint.Style.FILL);
+
+        // Lantern pitched cap & finial spike
+        scratchPath.reset();
+        scratchPath.moveTo(-11.5f, topY - 16f);
+        scratchPath.lineTo(0, topY - 23f);
+        scratchPath.lineTo(11.5f, topY - 16f);
+        scratchPath.close();
+        canvas.drawPath(scratchPath, ironWorkPaint);
+        canvas.drawCircle(0, topY - 25f, 2.2f, ironWorkPaint);
+
+        canvas.restore();
+    }
+
+    /**
+     * Draws small decorative grass tufts across the lawn for natural texture.
+     */
+    private void drawLawnDetails(Canvas canvas, int w, float promenadeY, float u) {
+        treeFoliageDarkPaint.setColor(0xFF2E7D32);
+        treeFoliageDarkPaint.setStrokeWidth(1.8f * u);
+        float[][] tufts = {
+            {0.14f, 0.88f}, {0.19f, 0.93f}, {0.31f, 0.91f},
+            {0.58f, 0.93f}, {0.82f, 0.90f}, {0.88f, 0.94f}
+        };
+        for (float[] t : tufts) {
+            float tx = w * t[0];
+            float ty = promenadeY * t[1];
+            canvas.drawLine(tx, ty, tx - 3.5f * u, ty - 5.5f * u, treeFoliageDarkPaint);
+            canvas.drawLine(tx, ty, tx, ty - 7f * u, treeFoliageDarkPaint);
+            canvas.drawLine(tx, ty, tx + 3.5f * u, ty - 5.5f * u, treeFoliageDarkPaint);
+        }
+        treeFoliageDarkPaint.setColor(0xFF1B5E20);
     }
 
     /**
