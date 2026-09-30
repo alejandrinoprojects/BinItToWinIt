@@ -120,28 +120,57 @@ public class EnvironmentManager {
     }
 
     /**
-     * Resets wind state to calm and schedules the next gust 8 to 15 seconds in the future.
+     * Returns the calibrated probability per calm second of a wind gust triggering.
+     *
+     * @param level Current gameplay level (1+).
+     * @return Chance per second (e.g. 0.05 for 5.0%/sec).
      */
-    private void resetWindCooldown() {
+    public float getWindChancePerSecond(int level) {
+        if (level <= 1) return 0.050f; // Level 1: 5.0% chance/sec (~20.0s average calm interval)
+        if (level == 2) return 0.100f; // Level 2: 10.0% chance/sec (~10.0s average calm interval)
+        if (level == 3) return 0.180f; // Level 3: 18.0% chance/sec (~5.5s average calm interval)
+        if (level == 4) return 0.250f; // Level 4: 25.0% chance/sec (~4.0s average calm interval)
+        return Math.min(0.333f, 0.250f + (level - 4) * 0.040f); // Level 5+: up to 33.3% chance/sec (~3.0s avg calm)
+    }
+
+    /**
+     * Resets wind state to calm and schedules the next gust based on level frequency.
+     *
+     * @param level Current gameplay level (1+).
+     */
+    public void resetWindCooldown(int level) {
         isWindActive = false;
         currentWindForce = 0f;
         for (WindStreak streak : streaks) {
             streakPool.recycle(streak);
         }
         streaks.clear();
-        nextWindTimer = 8f + random.nextFloat() * 7f;
+        float avgCalmTime = 1.0f / getWindChancePerSecond(level);
+        float minCalm = avgCalmTime * 0.75f;
+        float maxCalm = avgCalmTime * 1.25f;
+        nextWindTimer = minCalm + random.nextFloat() * (maxCalm - minCalm);
+    }
+
+    /**
+     * Resets wind state to calm with default Level 1 cooldown.
+     */
+    public void resetWindCooldown() {
+        resetWindCooldown(1);
     }
 
     /**
      * Triggers a new wind gust with randomized strength, direction, and visual particles.
+     *
+     * @param level Current gameplay level.
      */
-    private void triggerWindGust() {
+    private void triggerWindGust(int level) {
         isWindActive = true;
         windDurationTimer = 4f + random.nextFloat() * 3f; // Gust lasts 4 to 7 seconds
 
         // Choose random direction: left (-1) or right (+1)
         float direction = random.nextBoolean() ? 1f : -1f;
-        float speed = 100f + random.nextFloat() * 80f; // 100 to 180 px/sec
+        float baseSpeed = 90f + Math.min(level - 1, 4) * 25f;
+        float speed = baseSpeed + random.nextFloat() * 50f;
         currentWindForce = direction * speed;
 
         // Populate wind visual breeze lines from entity pool
@@ -149,7 +178,8 @@ public class EnvironmentManager {
             streakPool.recycle(streak);
         }
         streaks.clear();
-        for (int i = 0; i < 14; i++) {
+        int streakCount = 12 + Math.min(level * 2, 10);
+        for (int i = 0; i < streakCount; i++) {
             float sx = random.nextFloat() * 1000f;
             float sy = random.nextFloat() * 1400f;
             float slen = 50f + random.nextFloat() * 80f;
@@ -161,22 +191,23 @@ public class EnvironmentManager {
     }
 
     /**
-     * Updates wind countdown timers and advances particle positions.
+     * Updates wind countdown timers and advances particle positions according to level difficulty.
      *
      * @param deltaTime    Elapsed frame time in seconds.
      * @param screenWidth  Screen width in pixels.
      * @param screenHeight Screen height in pixels.
+     * @param level        Current gameplay level (1+).
      */
-    public void update(float deltaTime, int screenWidth, int screenHeight) {
+    public void update(float deltaTime, int screenWidth, int screenHeight, int level) {
         if (!isWindActive) {
             nextWindTimer -= deltaTime;
             if (nextWindTimer <= 0) {
-                triggerWindGust();
+                triggerWindGust(level);
             }
         } else {
             windDurationTimer -= deltaTime;
             if (windDurationTimer <= 0) {
-                resetWindCooldown();
+                resetWindCooldown(level);
             } else {
                 // Advance visual streak positions
                 for (WindStreak streak : streaks) {
@@ -191,6 +222,17 @@ public class EnvironmentManager {
                 }
             }
         }
+    }
+
+    /**
+     * Updates wind countdown timers with default level 1 settings for backwards compatibility.
+     *
+     * @param deltaTime    Elapsed frame time in seconds.
+     * @param screenWidth  Screen width in pixels.
+     * @param screenHeight Screen height in pixels.
+     */
+    public void update(float deltaTime, int screenWidth, int screenHeight) {
+        update(deltaTime, screenWidth, screenHeight, 1);
     }
 
     /**

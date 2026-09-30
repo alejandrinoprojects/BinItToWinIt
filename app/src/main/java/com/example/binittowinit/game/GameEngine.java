@@ -310,6 +310,7 @@ public class GameEngine {
 
         notifyScore();
         notifyLives();
+        environmentManager.resetWindCooldown(currentLevel);
         if (listener != null) {
             listener.onLevelChanged(currentLevel);
         }
@@ -343,7 +344,7 @@ public class GameEngine {
 
         // 1. Update dynamic environmental weather (wind)
         boolean prevWind = environmentManager.isWindActive();
-        environmentManager.update(deltaTime, screenWidth, screenHeight);
+        environmentManager.update(deltaTime, screenWidth, screenHeight, currentLevel);
         if (prevWind != environmentManager.isWindActive()) {
             if (listener != null) {
                 listener.onWindStatusChanged(environmentManager.isWindActive(), environmentManager.isBlowingRight());

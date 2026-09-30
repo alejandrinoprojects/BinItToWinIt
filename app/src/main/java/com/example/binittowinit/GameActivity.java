@@ -1,6 +1,7 @@
 package com.example.binittowinit;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -212,10 +213,21 @@ public class GameActivity extends AppCompatActivity {
             if (soundManager != null) {
                 soundManager.playGameOver();
             }
-            int previousBest = scoreRepository.getHighScore();
-            viewModel.saveMatchScore(playerName, event.score, event.itemsSorted, event.crittersRescued);
-            boolean isNewBest = event.score > previousBest && event.score > 0;
-            showGameOverDialog(event.score, event.itemsSorted, event.crittersRescued, isNewBest);
+            java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+                int previousBest = 0;
+                try {
+                    if (scoreRepository != null) {
+                        previousBest = scoreRepository.getHighScore();
+                    }
+                } catch (Exception ignored) {}
+                viewModel.saveMatchScore(playerName, event.score, event.itemsSorted, event.crittersRescued);
+                boolean isNewBest = event.score > previousBest && event.score > 0;
+                runOnUiThread(() -> {
+                    if (!isFinishing() && !isDestroyed()) {
+                        showGameOverDialog(event.score, event.itemsSorted, event.crittersRescued, isNewBest);
+                    }
+                });
+            });
         });
     }
 
@@ -322,6 +334,9 @@ public class GameActivity extends AppCompatActivity {
         });
 
         currentDialog = dialog;
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
         dialog.show();
     }
 
@@ -371,6 +386,9 @@ public class GameActivity extends AppCompatActivity {
         });
 
         currentDialog = dialog;
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
         dialog.show();
     }
 }

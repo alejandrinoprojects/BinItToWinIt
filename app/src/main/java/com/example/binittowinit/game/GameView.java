@@ -79,9 +79,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Paint fencePostPaint;
     private Paint fenceRailPaint;
     private Paint treeTrunkPaint;
+    private Paint treeBarkDarkPaint;
     private Paint treeFoliageDarkPaint;
     private Paint treeFoliageMidPaint;
     private Paint treeFoliageLightPaint;
+    private Paint treeFoliageHighlightPaint;
+    private Paint treeShadowPaint;
+    private float treeSwayTimer = 0f;
     private Paint flowerDotPaint;
     private Paint sidewalkPaint;
     private Paint sidewalkPavingPaint;
@@ -231,6 +235,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         treeTrunkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         treeTrunkPaint.setColor(0xFF5D4037);
 
+        treeBarkDarkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        treeBarkDarkPaint.setColor(0xFF3E2723);
+
         treeFoliageDarkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         treeFoliageDarkPaint.setColor(0xFF1B5E20);
 
@@ -239,6 +246,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         treeFoliageLightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         treeFoliageLightPaint.setColor(0xFF43A047);
+
+        treeFoliageHighlightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        treeFoliageHighlightPaint.setColor(0xFF81C784);
+
+        treeShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        treeShadowPaint.setColor(0x33000000);
 
         flowerDotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -427,8 +440,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                         engine.update(deltaTime);
                     }
 
-                    // Animate gentle drifting of park clouds
+                    // Animate gentle drifting of park clouds and foliage sway
                     cloudDrift += deltaTime * 14f;
+                    treeSwayTimer += deltaTime * 2.2f;
                     int viewWidth = getWidth();
                     if (cloudDrift > (viewWidth + 300f)) {
                         cloudDrift = 0f;
@@ -617,52 +631,128 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         // 9. Framing Park Trees (Lush cartoon trees on screen borders)
-        // Left Tree:
-        float leftTrunkBaseX = w * 0.02f;
+        // 9. Framing Park Trees (Lush volumetric cartoon trees with organic curves and subtle wind sway)
+        float currentWind = (engine != null) ? engine.getEnvironmentManager().getCurrentWindForce() : 0f;
+        float swayPx = (float) Math.sin(treeSwayTimer) * (w * 0.005f) + (currentWind / 150f) * (w * 0.012f);
+
+        // Ground shadow beneath Left Tree
+        canvas.drawOval(-w * 0.04f, promenadeY - 8f, w * 0.16f, promenadeY + 12f, treeShadowPaint);
+
+        // Left Trunk: Smooth curved woody trunk branching gracefully
         Path leftTrunk = new Path();
-        leftTrunk.moveTo(-10f, promenadeY);
-        leftTrunk.lineTo(w * 0.08f, promenadeY);
-        leftTrunk.lineTo(w * 0.05f, promenadeY * 0.45f);
-        leftTrunk.lineTo(w * 0.12f, promenadeY * 0.38f);
-        leftTrunk.lineTo(w * 0.10f, promenadeY * 0.35f);
-        leftTrunk.lineTo(w * 0.03f, promenadeY * 0.42f);
-        leftTrunk.lineTo(-10f, promenadeY * 0.48f);
+        leftTrunk.moveTo(-w * 0.04f, promenadeY);
+        leftTrunk.quadTo(w * 0.02f, promenadeY * 0.74f, w * 0.04f + swayPx * 0.2f, promenadeY * 0.52f);
+        // Main rising branch
+        leftTrunk.lineTo(w * 0.07f + swayPx * 0.4f, promenadeY * 0.35f);
+        leftTrunk.lineTo(w * 0.11f + swayPx * 0.4f, promenadeY * 0.37f);
+        leftTrunk.quadTo(w * 0.07f, promenadeY * 0.48f, w * 0.10f + swayPx * 0.3f, promenadeY * 0.53f);
+        // Side branch reaching inward
+        leftTrunk.lineTo(w * 0.16f + swayPx * 0.3f, promenadeY * 0.46f);
+        leftTrunk.lineTo(w * 0.17f + swayPx * 0.3f, promenadeY * 0.49f);
+        leftTrunk.quadTo(w * 0.11f, promenadeY * 0.60f, w * 0.11f, promenadeY);
         leftTrunk.close();
-        canvas.drawPath(leftTrunk, treeTrunkPaint);
 
-        // Left canopy (layered leafy lobes)
-        treeFoliageDarkPaint.setColor(0xFF1B5E20);
-        canvas.drawCircle(w * 0.02f, promenadeY * 0.42f, 95f, treeFoliageDarkPaint);
-        canvas.drawCircle(w * 0.08f, promenadeY * 0.48f, 85f, treeFoliageDarkPaint);
-        treeFoliageMidPaint.setColor(0xFF2E7D32);
-        canvas.drawCircle(w * 0.05f, promenadeY * 0.34f, 90f, treeFoliageMidPaint);
-        canvas.drawCircle(w * 0.12f, promenadeY * 0.38f, 75f, treeFoliageMidPaint);
-        treeFoliageLightPaint.setColor(0xFF43A047);
-        canvas.drawCircle(w * 0.04f, promenadeY * 0.28f, 70f, treeFoliageLightPaint);
-        canvas.drawCircle(w * 0.10f, promenadeY * 0.31f, 55f, treeFoliageLightPaint);
+        // Shaded bark back-edge
+        canvas.drawPath(leftTrunk, treeBarkDarkPaint);
+        // Warm main bark
+        canvas.save();
+        canvas.clipPath(leftTrunk);
+        canvas.drawRect(w * 0.02f, 0, w * 0.30f, promenadeY + 20f, treeTrunkPaint);
+        canvas.restore();
 
-        // Right Tree:
+        // Left Canopy: Layered volumetric puff clouds scaled to screen size
+        float lR1 = w * 0.16f;
+        float lR2 = w * 0.13f;
+        float lR3 = w * 0.11f;
+        float lR4 = w * 0.09f;
+
+        float lcx1 = w * 0.03f + swayPx;
+        float lcy1 = promenadeY * 0.44f;
+        float lcx2 = w * 0.10f + swayPx;
+        float lcy2 = promenadeY * 0.48f;
+        float lcx3 = w * 0.06f + swayPx;
+        float lcy3 = promenadeY * 0.34f;
+        float lcx4 = w * 0.13f + swayPx;
+        float lcy4 = promenadeY * 0.38f;
+        float lcx5 = w * 0.05f + swayPx;
+        float lcy5 = promenadeY * 0.26f;
+
+        // 1. Deep ambient shadow puffs (underside)
+        canvas.drawCircle(lcx1, lcy1, lR1, treeFoliageDarkPaint);
+        canvas.drawCircle(lcx2, lcy2, lR2, treeFoliageDarkPaint);
+
+        // 2. Mid forest green body
+        canvas.drawCircle(lcx1 + 6f, lcy1 - 6f, lR1 * 0.90f, treeFoliageMidPaint);
+        canvas.drawCircle(lcx2 + 4f, lcy2 - 6f, lR2 * 0.90f, treeFoliageMidPaint);
+        canvas.drawCircle(lcx3, lcy3, lR1 * 0.95f, treeFoliageMidPaint);
+        canvas.drawCircle(lcx4, lcy4, lR2 * 0.85f, treeFoliageMidPaint);
+
+        // 3. Vibrant sun-facing canopy crown
+        canvas.drawCircle(lcx3 + 8f, lcy3 - 8f, lR1 * 0.78f, treeFoliageLightPaint);
+        canvas.drawCircle(lcx4 + 6f, lcy4 - 6f, lR2 * 0.72f, treeFoliageLightPaint);
+        canvas.drawCircle(lcx5, lcy5, lR3, treeFoliageLightPaint);
+
+        // 4. Bright sunlit crest highlights facing the sun (top-right)
+        canvas.drawCircle(lcx3 + 18f, lcy3 - 18f, lR3 * 0.55f, treeFoliageHighlightPaint);
+        canvas.drawCircle(lcx4 + 14f, lcy4 - 14f, lR4 * 0.50f, treeFoliageHighlightPaint);
+        canvas.drawCircle(lcx5 + 12f, lcy5 - 12f, lR4 * 0.60f, treeFoliageHighlightPaint);
+
+        // Ground shadow beneath Right Tree
+        canvas.drawOval(w * 0.84f, promenadeY - 8f, w * 1.04f, promenadeY + 12f, treeShadowPaint);
+
+        // Right Trunk: Smooth curved woody trunk branching into screen
         Path rightTrunk = new Path();
-        rightTrunk.moveTo(w + 10f, promenadeY);
-        rightTrunk.lineTo(w * 0.92f, promenadeY);
-        rightTrunk.lineTo(w * 0.95f, promenadeY * 0.47f);
-        rightTrunk.lineTo(w * 0.88f, promenadeY * 0.40f);
-        rightTrunk.lineTo(w * 0.90f, promenadeY * 0.37f);
-        rightTrunk.lineTo(w * 0.97f, promenadeY * 0.44f);
-        rightTrunk.lineTo(w + 10f, promenadeY * 0.50f);
+        rightTrunk.moveTo(w * 1.04f, promenadeY);
+        rightTrunk.quadTo(w * 0.98f, promenadeY * 0.74f, w * 0.96f + swayPx * 0.2f, promenadeY * 0.52f);
+        // Main rising branch
+        rightTrunk.lineTo(w * 0.93f + swayPx * 0.4f, promenadeY * 0.35f);
+        rightTrunk.lineTo(w * 0.89f + swayPx * 0.4f, promenadeY * 0.37f);
+        rightTrunk.quadTo(w * 0.93f, promenadeY * 0.48f, w * 0.90f + swayPx * 0.3f, promenadeY * 0.53f);
+        // Side branch reaching inward left
+        rightTrunk.lineTo(w * 0.84f + swayPx * 0.3f, promenadeY * 0.46f);
+        rightTrunk.lineTo(w * 0.83f + swayPx * 0.3f, promenadeY * 0.49f);
+        rightTrunk.quadTo(w * 0.89f, promenadeY * 0.60f, w * 0.89f, promenadeY);
         rightTrunk.close();
-        canvas.drawPath(rightTrunk, treeTrunkPaint);
 
-        // Right canopy
-        treeFoliageDarkPaint.setColor(0xFF1B5E20);
-        canvas.drawCircle(w * 0.98f, promenadeY * 0.44f, 92f, treeFoliageDarkPaint);
-        canvas.drawCircle(w * 0.92f, promenadeY * 0.50f, 80f, treeFoliageDarkPaint);
-        treeFoliageMidPaint.setColor(0xFF2E7D32);
-        canvas.drawCircle(w * 0.95f, promenadeY * 0.36f, 88f, treeFoliageMidPaint);
-        canvas.drawCircle(w * 0.88f, promenadeY * 0.40f, 72f, treeFoliageMidPaint);
-        treeFoliageLightPaint.setColor(0xFF43A047);
-        canvas.drawCircle(w * 0.96f, promenadeY * 0.30f, 68f, treeFoliageLightPaint);
-        canvas.drawCircle(w * 0.90f, promenadeY * 0.33f, 52f, treeFoliageLightPaint);
+        // Shaded bark back-edge
+        canvas.drawPath(rightTrunk, treeBarkDarkPaint);
+        // Warm main bark
+        canvas.save();
+        canvas.clipPath(rightTrunk);
+        canvas.drawRect(w * 0.70f, 0, w * 0.98f, promenadeY + 20f, treeTrunkPaint);
+        canvas.restore();
+
+        // Right Canopy: Layered volumetric puff clouds
+        float rcx1 = w * 0.97f + swayPx;
+        float rcy1 = promenadeY * 0.44f;
+        float rcx2 = w * 0.90f + swayPx;
+        float rcy2 = promenadeY * 0.48f;
+        float rcx3 = w * 0.94f + swayPx;
+        float rcy3 = promenadeY * 0.34f;
+        float rcx4 = w * 0.87f + swayPx;
+        float rcy4 = promenadeY * 0.38f;
+        float rcx5 = w * 0.95f + swayPx;
+        float rcy5 = promenadeY * 0.26f;
+
+        // 1. Deep ambient shadow puffs (underside)
+        canvas.drawCircle(rcx1, rcy1, lR1, treeFoliageDarkPaint);
+        canvas.drawCircle(rcx2, rcy2, lR2, treeFoliageDarkPaint);
+
+        // 2. Mid forest green body
+        canvas.drawCircle(rcx1 + 6f, rcy1 - 6f, lR1 * 0.90f, treeFoliageMidPaint);
+        canvas.drawCircle(rcx2 + 4f, rcy2 - 6f, lR2 * 0.90f, treeFoliageMidPaint);
+        canvas.drawCircle(rcx3, rcy3, lR1 * 0.95f, treeFoliageMidPaint);
+        canvas.drawCircle(rcx4, rcy4, lR2 * 0.85f, treeFoliageMidPaint);
+
+        // 3. Vibrant sun-facing canopy crown
+        canvas.drawCircle(rcx3 + 8f, rcy3 - 8f, lR1 * 0.78f, treeFoliageLightPaint);
+        canvas.drawCircle(rcx4 + 6f, rcy4 - 6f, lR2 * 0.72f, treeFoliageLightPaint);
+        canvas.drawCircle(rcx5, rcy5, lR3, treeFoliageLightPaint);
+
+        // 4. Bright sunlit crest highlights facing the sun (top-right)
+        canvas.drawCircle(rcx3 + 18f, rcy3 - 18f, lR3 * 0.55f, treeFoliageHighlightPaint);
+        canvas.drawCircle(rcx4 + 14f, rcy4 - 14f, lR4 * 0.50f, treeFoliageHighlightPaint);
+        canvas.drawCircle(rcx5 + 12f, rcy5 - 12f, lR4 * 0.60f, treeFoliageHighlightPaint);
 
         // 10. Park Sidewalk Promenade Pavement from promenadeY down to bottom
         canvas.drawRect(0, promenadeY, w, h, sidewalkPaint);

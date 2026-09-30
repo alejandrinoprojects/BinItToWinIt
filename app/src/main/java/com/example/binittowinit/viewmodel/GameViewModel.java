@@ -240,7 +240,9 @@ public class GameViewModel extends ViewModel implements GameEngine.GameEventList
      */
     public void saveMatchScore(String playerName, int score, int itemsSorted, int crittersRescued) {
         if (scoreRepository != null) {
-            scoreRepository.insertScore(playerName, score, itemsSorted, crittersRescued);
+            java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+                scoreRepository.insertScore(playerName, score, itemsSorted, crittersRescued);
+            });
         }
     }
 
